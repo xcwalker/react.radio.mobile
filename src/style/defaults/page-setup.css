@@ -27,6 +27,10 @@ body.oled {
   color: white;
 }
 
+body.noscroll {
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
 }

@@ -61,7 +61,6 @@ export default function App() {
             <Route path="sr-rock" element={<Navigate to="../simulator-radio-rock" />} />
           </Route>
         </Routes>
-        <Footer />
       </BrowserRouter>
     </>
   );
