@@ -215,10 +215,10 @@ export function Player(propsIn) {
       <Helmet defer={false}>
         <meta name="twitter:title" content={props.station + " | ReactRadio"} />
         {state === "paused" && audioUrlState === "" && <title>{props.station + " | ReactRadio"}</title>}
-        {state === "paused" && audioUrlState !== "" && nowPlaying?.artists && (
+        {state === "paused" && audioUrlState !== "" && (nowPlaying?.title || nowPlaying?.artists) && (
           <title>{nowPlaying?.title + " - " + nowPlaying?.artists + " | " + props.station + " | ReactRadio"}</title>
         )}
-        {state === "play" && audioUrlState !== "" && nowPlaying?.artists && (
+        {state === "play" && audioUrlState !== "" && (nowPlaying?.title || nowPlaying?.artists) && (
           <title>{nowPlaying?.title + " - " + nowPlaying?.artists + " | " + props.station + " | ReactRadio"}</title>
         )}
         <meta name="description" content={props.station + " on ReactRadio | A lightweight react based website for streaming radio."} />
@@ -262,7 +262,7 @@ export function Player(propsIn) {
               </div>
             )}
           </div>
-          <button className={"item " + state} onClick={() => live()} title="Live">
+          <button className={"item " + state} onClick={() => live()} title="Live" tabIndex={showStations ? -1 : 0}>
             {state === "play" && (
               <svg viewBox="0 0 24 24">
                 <path d="M0 0h24v24H0z" fill="none" />
@@ -281,7 +281,7 @@ export function Player(propsIn) {
             )}
           </button>
           {state === "play" && (
-            <button className="item" onClick={() => stop()} title="Stop">
+            <button className="item" onClick={() => stop()} title="Stop" tabIndex={showStations ? -1 : 0}>
               <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24">
                 <g>
                   <rect fill="none" height="24" />
@@ -295,7 +295,7 @@ export function Player(propsIn) {
               </svg>
             </button>
           )}
-          <button className="item" id="station" onClick={() => setShowStations(true)}>
+          <button className="item" id="station" onClick={() => setShowStations(true)} tabIndex={showStations ? -1 : 0}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M0 0h24v24H0V0z" fill="none" />
               <path d="M20 6H8.3l8.26-3.34L15.88 1 3.24 6.15C2.51 6.43 2 7.17 2 8v12c0 1.1.89 2 2 2h16c1.11 0 2-.9 2-2V8c0-1.11-.89-2-2-2zm0 2v3h-2V9h-2v2H4V8h16zM4 20v-7h16v7H4z" />
@@ -316,8 +316,8 @@ export function Player(propsIn) {
 
 function Switcher(props) {
   return (
-    <section id="switcher">
-      <div className="container">
+    <section id="switcher" tabIndex={-1}>
+      <div className="container" tabIndex={-1}>
         <ul>
           {stations &&
             stations.map((item, index) => {
@@ -339,7 +339,7 @@ function Switcher(props) {
               return (
                 <li key={index}>
                   <Link
-                    to={item.url}
+                    to={item.url + (document.body.classList.contains("oled") ? "?oled" : "")}
                     onClick={() => {
                       props.setShowStations(false);
                     }}

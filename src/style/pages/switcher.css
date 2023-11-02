@@ -23,6 +23,13 @@ section#switcher > div.container {
   background-color: var(--background-color-200);
 }
 
+body.oled section#switcher > div.container {
+  /* styling */
+  background: black;
+  outline: 3px solid var(--background-color-100);
+  outline-offset: -3px;
+}
+
 section#switcher > div.container > ul {
   /* spacing */
   width: 100%;
@@ -47,8 +54,15 @@ section#switcher > div.container > ul > li {
 
   /* styling */
   border-radius: 10px;
-  background-color: var(--background-color-100);
+  background: var(--background-color-100);
   overflow: hidden;
+}
+
+body.oled section#switcher > div.container > ul > li {
+  /* styling */
+  background: initial;
+  outline: 3px solid var(--background-color-100);
+  outline-offset: -3px;
 }
 
 section#switcher > div.container > ul > li > a,
@@ -72,13 +86,24 @@ section#switcher > div.container > ul > li > button {
   text-decoration: none;
 
   /* styling */
-  background: var(--background-color-100);
   border: none;
   color: var(--foreground-color-100);
+  background-color: transparent;
+}
+section#switcher > div.container > ul > li:hover,
+section#switcher > div.container > ul > li:focus-within {
+  /* styling */
+  outline: 2px solid;
+  outline-offset: -2px;
+  outline-color: currentColor !important;
+}
+section#switcher > div.container > ul > li:focus-within {
+  /* styling */
+  outline-color: var(--selector-color) !important;
 }
 
-section#switcher > div.container > ul > li > a:active,
-section#switcher > div.container > ul > li > button:active {
+section#switcher > div.container > ul > li:active,
+section#switcher > div.container > ul > li:active {
   /* styling */
   background: var(--background-color-300);
 }
