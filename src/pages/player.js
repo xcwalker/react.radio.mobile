@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
@@ -11,7 +11,7 @@ import { stations } from "../App";
 
 export function Player(propsIn) {
   const [props, setProps] = useState({});
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
   const [dj, setDJ] = useState();
   const [nowPlaying, setNowPlaying] = useState();
   const [ticking, setTicking] = useState(true);
@@ -165,14 +165,14 @@ export function Player(propsIn) {
   }
 
   useEffect(() => {
-    if (nowPlaying === undefined || nowPlaying === null || audioUrlState === "" || navigator.mediaSession.metadata?.title === nowPlaying.title) return;
+    if (nowPlaying === undefined || audioUrlState === "" || navigator.mediaSession.metadata?.title === nowPlaying.title) return;
 
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: nowPlaying.title,
-        artist: nowPlaying.artists,
-        album: "ReactRadio",
-        artwork: [{ src: nowPlaying.art }],
+        title: nowPlaying.title ? nowPlaying.title : props.station,
+        artist: nowPlaying.artists ? nowPlaying.artists : "ReactRadio",
+        album: props.station + " | ReactRadio",
+        artwork: nowPlaying.art ? [{ src: nowPlaying.art }] : [{src: "http://mobile.reactradio.dev/apple-touch-icon.png?v=3"}],
       });
 
       navigator.mediaSession.setActionHandler("play", async () => {
@@ -208,7 +208,7 @@ export function Player(propsIn) {
         }
       });
     }
-  }, [nowPlaying, audioUrlState, props.audioUrl, navigate, props.station]);
+  }, [nowPlaying, audioUrlState, props.audioUrl, navigate, props.station, stationIndex]);
 
   return (
     <>
@@ -227,14 +227,24 @@ export function Player(propsIn) {
       <section id="mobile" onLoad={() => setTicking(true)}>
         <ul className="container">
           <div className="item" id="live">
-            <img src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} className="background" />
-            <div className="info">
-              <img src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} />
-              <div className="text">
-                <span className="title">{nowPlaying?.title}</span>
-                <span className="subTitle">{nowPlaying?.artists}</span>
-              </div>
+            {nowPlaying?.art && <img src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} className="background" />}
+            <div className="backdrop">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135.47 135.47">
+                <path d="m0 0 45.155 45.155h45.156V90.31h45.155V45.155L90.311 0zm90.311 90.311L45.155 45.156v45.155l45.156 45.156h45.155zm-45.156 0L0 45.156v90.311h45.155z" />
+              </svg>
             </div>
+            {!(nowPlaying?.title || nowPlaying?.artists || nowPlaying?.art) && <span className="ident">{props.station}</span>}
+            {(nowPlaying?.title || nowPlaying?.artists || nowPlaying?.art) && (
+              <div className="info">
+                {nowPlaying?.art && <img src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} />}
+                {(nowPlaying?.title || nowPlaying?.artists) && (
+                  <div className="text">
+                    <span className="title">{nowPlaying?.title}</span>
+                    <span className="subTitle">{nowPlaying?.artists}</span>
+                  </div>
+                )}
+              </div>
+            )}
             {dj && dj.avatar && (
               <div className="dj">
                 {dj?.avatar && !props.apiLive && (

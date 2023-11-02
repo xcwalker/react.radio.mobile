@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
 
-import { Footer } from "./components/footer";
 import { Player } from "./pages/player";
 
 import "./style/defaults/variables.css";
@@ -20,6 +18,10 @@ export default function App() {
           <Route path="sr" element={<Navigate to="/station/simulator-radio" />} />
           <Route path="srrock" element={<Navigate to="/station/simulator-radio-rock" />} />
           <Route path="sr-rock" element={<Navigate to="/station/simulator-radio-rock" />} />
+          <Route path="srdance" element={<Navigate to="/station/simulator-radio-dance" />} />
+          <Route path="sr-dance" element={<Navigate to="/station/simulator-radio-dance" />} />
+          <Route path="srxmas" element={<Navigate to="/station/simulator-radio-xmas" />} />
+          <Route path="sr-xmas" element={<Navigate to="/station/simulator-radio-xmas" />} />
 
           <Route path="station">
             <Route
@@ -42,6 +44,28 @@ export default function App() {
                   audioUrl="https://simulatorradio.stream/rock"
                   apiUrl="https://apiv2.simulatorradio.com/rock/nowplaying"
                   apiHistoryUrl="https://apiv2.simulatorradio.com/rock/history?page=1&pagesize="
+                />
+              }
+            />
+            <Route
+              path="simulator-radio-dance"
+              element={
+                <Player
+                  station="SR Dance"
+                  audioUrl="https://simulatorradio.stream/dance"
+                  apiUrl="https://apiv2.simulatorradio.com/dance/nowplaying"
+                  apiHistoryUrl="https://apiv2.simulatorradio.com/dance/history?page=1&pagesize="
+                />
+              }
+            />
+            <Route
+              path="simulator-radio-xmas"
+              element={
+                <Player
+                  station="SR Xmas"
+                  audioUrl="https://simulatorradio.stream/xmas"
+                  apiUrl="https://apiv2.simulatorradio.com/xmas/nowplaying"
+                  apiHistoryUrl="https://apiv2.simulatorradio.com/xmas/history?page=1&pagesize="
                 />
               }
             />
@@ -84,6 +108,14 @@ export const stations = [
   {
     station: "SR Rock",
     url: "/station/simulator-radio-rock",
+  },
+  {
+    station: "SR Dance",
+    url: "/station/simulator-radio-dance",
+  },
+  {
+    station: "SR Xmas",
+    url: "/station/simulator-radio-xmas",
   },
   {
     station: "Truckers FM",

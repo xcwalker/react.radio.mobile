@@ -59,6 +59,33 @@ section#mobile > .container > .item#live {
   gap: 5px;
 }
 
+section#mobile > .container > .item#live > .backdrop {
+  /* position */
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  /* flex */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* styling */
+  background-color: var(--background-color-200);
+
+}
+
+section#mobile > .container > .item#live > .backdrop > svg {
+  /* sizing */
+  --_size: 25dvh;
+  width: var(--_size);
+  height: var(--_size);
+
+  /* styling */
+  fill: currentColor;
+  color: var(--background-color-500);
+}
+
 section#mobile > .container > .item#live img.background {
   /* position */
   position: absolute;
@@ -72,6 +99,27 @@ section#mobile > .container > .item#live img.background {
   /* image */
   object-fit: cover;
   filter: blur(10px) brightness(0.75);
+}
+
+section#mobile > .container > .item#live .ident {
+  /* position */
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  /* flex */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* text */
+  text-align: center;
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1;
+
+  /* styling */
+  color: var(--foreground-color-200);
 }
 
 section#mobile > .container > .item#live .info {
