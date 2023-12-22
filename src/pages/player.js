@@ -145,11 +145,11 @@ export function Player(propsIn) {
   }, [count, props]);
 
   useEffect(() => {
-    const timer = setTimeout(() => ticking && setCount((c) => c + 1), 3000);
+    const timer = setTimeout(() => ticking && setCount(count + 1), 3000);
     return () => {
       clearTimeout(timer);
     };
-  }, [ticking]);
+  }, [count, ticking]);
 
   function stop() {
     setAudioUrlState("");
