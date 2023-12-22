@@ -8,11 +8,15 @@ import "../style/pages/mobile.css";
 import "../style/pages/switcher.css";
 
 import { stations } from "../App";
+import NoSleep from "nosleep.js";
+
+var noSleep = new NoSleep();
 
 export function Player(propsIn) {
   const [props, setProps] = useState({});
-  const [params] = useSearchParams();
+  const [params, setParams] = useSearchParams();
   const [dj, setDJ] = useState();
+  const [oldDJ, setOldDJ] = useState();
   const [nowPlaying, setNowPlaying] = useState();
   const [ticking, setTicking] = useState(true);
   const [count, setCount] = useState(0);
@@ -20,6 +24,7 @@ export function Player(propsIn) {
   const [state, setState] = useState("paused");
   const [showStations, setShowStations] = useState(false);
   const [stationIndex, setStationIndex] = useState();
+  const [djCount, setDJCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -94,7 +99,13 @@ export function Player(propsIn) {
                 outDJ.details = res.djs.now.details;
               }
 
-              setDJ(outDJ);
+              setDJ((dj) => {
+                if (dj && (dj.displayname !== outDJ.displayname || dj.avatar !== outDJ.avatar || dj.details !== outDJ.details)) {
+                  setDJCount((count) => (count === 0 ? 1 : 0));
+                  setOldDJ(dj);
+                }
+                return outDJ;
+              });
             } else {
               fetch(props.apiLive).then((data) => {
                 data.json().then((res) => {
@@ -110,7 +121,13 @@ export function Player(propsIn) {
                     outDJ.details = res.data.description;
                   }
 
-                  setDJ(outDJ);
+                  setDJ((dj) => {
+                    if (dj && (dj.displayname !== outDJ.displayname || dj.avatar !== outDJ.avatar || dj.details !== outDJ.details)) {
+                      setDJCount((count) => (count === 0 ? 1 : 0));
+                      setOldDJ(dj);
+                    }
+                    return outDJ;
+                  });
                 });
               });
             }
@@ -128,15 +145,16 @@ export function Player(propsIn) {
   }, [count, props]);
 
   useEffect(() => {
-    const timer = setTimeout(() => ticking && setCount(count + 1), 3000);
+    const timer = setTimeout(() => ticking && setCount((c) => c + 1), 3000);
     return () => {
       clearTimeout(timer);
     };
-  }, [count, ticking]);
+  }, [ticking]);
 
   function stop() {
     setAudioUrlState("");
     setState("paused");
+    noSleep.disable();
     return;
   }
 
@@ -162,18 +180,30 @@ export function Player(propsIn) {
     setState("play");
     await player.load();
     player.play();
+    noSleep.enable();
   }
 
   useEffect(() => {
-    if (nowPlaying === undefined || audioUrlState === "" || navigator.mediaSession.metadata?.title === nowPlaying.title) return;
+    if (nowPlaying === undefined || audioUrlState === "") return;
 
     if ("mediaSession" in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: nowPlaying.title ? nowPlaying.title : props.station,
-        artist: nowPlaying.artists ? nowPlaying.artists : "ReactRadio",
-        album: props.station + " | ReactRadio",
-        artwork: nowPlaying.art ? [{ src: nowPlaying.art }] : [{src: "http://mobile.reactradio.dev/apple-touch-icon.png?v=3"}],
-      });
+      if (count % 2 === 0) {
+        if (navigator.mediaSession.metadata?.title === dj?.details) return;
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: dj?.details ? dj?.details : props.station,
+          artist: dj?.displayname ? dj?.displayname : "ReactRadio",
+          album: props.station + " | ReactRadio",
+          artwork: dj.avatar ? [{ src: dj.avatar }] : [{ src: "http://mobile.reactradio.dev/apple-touch-icon.png?v=3" }],
+        });
+      } else {
+        if (navigator.mediaSession.metadata?.title === nowPlaying.title) return;
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: nowPlaying.title ? nowPlaying.title : props.station,
+          artist: nowPlaying.artists ? nowPlaying.artists : "ReactRadio",
+          album: props.station + " | ReactRadio",
+          artwork: nowPlaying.art ? [{ src: nowPlaying.art }] : [{ src: "http://mobile.reactradio.dev/apple-touch-icon.png?v=3" }],
+        });
+      }
 
       navigator.mediaSession.setActionHandler("play", async () => {
         var player = document.querySelector("#audioPlayer");
@@ -185,11 +215,13 @@ export function Player(propsIn) {
         setState("play");
         await player.load();
         player.play();
+        noSleep.enable();
       });
 
       navigator.mediaSession.setActionHandler("pause", () => {
         setState("paused");
         document.querySelector("#audioPlayer").pause();
+        noSleep.disable();
       });
 
       navigator.mediaSession.setActionHandler("previoustrack", async () => {
@@ -208,7 +240,7 @@ export function Player(propsIn) {
         }
       });
     }
-  }, [nowPlaying, audioUrlState, props.audioUrl, navigate, props.station, stationIndex]);
+  }, [nowPlaying, audioUrlState, props.audioUrl, navigate, props.station, stationIndex, count, dj]);
 
   return (
     <>
@@ -236,7 +268,15 @@ export function Player(propsIn) {
             {!(nowPlaying?.title || nowPlaying?.artists || nowPlaying?.art) && <span className="ident">{props.station}</span>}
             {(nowPlaying?.title || nowPlaying?.artists || nowPlaying?.art) && (
               <div className="info">
-                {nowPlaying?.art && <img src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} />}
+                {nowPlaying?.art && (
+                  <img
+                    src={nowPlaying?.art}
+                    alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists}
+                    onClick={() => {
+                      params.get("oled") !== null ? setParams({}) : setParams({ oled: undefined });
+                    }}
+                  />
+                )}
                 {(nowPlaying?.title || nowPlaying?.artists) && (
                   <div className="text">
                     <span className="title">{nowPlaying?.title}</span>
@@ -245,19 +285,47 @@ export function Player(propsIn) {
                 )}
               </div>
             )}
-            {dj && dj.avatar && (
-              <div className="dj">
-                {dj?.avatar && !props.apiLive && (
+            {(djCount === 0 ? oldDJ : dj) && (djCount === 0 ? oldDJ?.avatar : dj?.avatar) && (
+              <div className="dj" data-count={djCount === 0 ? 0 : 1}>
+                {(djCount === 0 ? oldDJ?.avatar : dj?.avatar) && !props.apiLive && (
                   <img
-                    src={"https://simulatorradio.com/processor/avatar?size=256&name=" + dj?.avatar}
-                    alt={dj?.avatar + "'s avatar"}
+                    src={"https://simulatorradio.com/processor/avatar?size=256&name=" + (djCount === 0 ? oldDJ?.avatar : dj?.avatar)}
+                    alt={(djCount === 0 ? oldDJ?.avatar : dj?.avatar) + "'s avatar"}
                     className="profilePicture"
                   />
                 )}
-                {dj?.avatar && props.apiLive && <img src={dj?.avatar} alt={dj?.avatar + "'s avatar"} className="profilePicture" />}
+                {(djCount === 0 ? oldDJ?.avatar : dj?.avatar) && props.apiLive && (
+                  <img
+                    src={djCount === 0 ? oldDJ?.avatar : dj?.avatar}
+                    alt={(djCount === 0 ? oldDJ?.avatar : dj?.avatar) + "'s avatar"}
+                    className="profilePicture"
+                  />
+                )}
                 <div className="about">
-                  <span className="title">{dj?.displayname}</span>
-                  <ReactMarkdown className="subTitle">{dj?.details}</ReactMarkdown>
+                  <span className="title">{djCount === 0 ? oldDJ?.displayname : dj?.displayname}</span>
+                  <ReactMarkdown className="subTitle">{djCount === 0 ? oldDJ?.details : dj?.details}</ReactMarkdown>
+                </div>
+              </div>
+            )}
+            {(djCount === 0 ? dj : oldDJ) && (djCount === 0 ? dj?.avatar : oldDJ?.avatar) && (
+              <div className="dj" data-count={djCount === 0 ? 1 : 0}>
+                {(djCount === 0 ? dj?.avatar : oldDJ?.avatar) && !props.apiLive && (
+                  <img
+                    src={"https://simulatorradio.com/processor/avatar?size=256&name=" + (djCount === 0 ? dj?.avatar : oldDJ?.avatar)}
+                    alt={(djCount === 0 ? dj?.avatar : oldDJ?.avatar) + "'s avatar"}
+                    className="profilePicture"
+                  />
+                )}
+                {(djCount === 0 ? dj?.avatar : oldDJ?.avatar) && props.apiLive && (
+                  <img
+                    src={djCount === 0 ? dj?.avatar : oldDJ?.avatar}
+                    alt={(djCount === 0 ? dj?.avatar : oldDJ?.avatar) + "'s avatar"}
+                    className="profilePicture"
+                  />
+                )}
+                <div className="about">
+                  <span className="title">{djCount === 0 ? dj?.displayname : oldDJ?.displayname}</span>
+                  <ReactMarkdown className="subTitle">{djCount === 0 ? dj?.details : oldDJ?.details}</ReactMarkdown>
                 </div>
               </div>
             )}
@@ -306,6 +374,13 @@ export function Player(propsIn) {
               <span className="subTitle">Current Station</span>
             </div>
           </button>
+          {/* <button
+            onClick={() => {
+              setDJCount((count) => (count === 0 ? 1 : 0));
+            }}
+          >
+            test
+          </button> */}
         </ul>
       </section>
       {showStations && <Switcher station={props.station} setShowStations={setShowStations} />}

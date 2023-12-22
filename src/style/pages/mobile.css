@@ -85,6 +85,10 @@ section#mobile > .container > .item#live > .backdrop > svg {
   color: var(--background-color-500);
 }
 
+body.oled section#mobile > .container > .item#live > .backdrop > svg {
+  opacity: 0.5;
+}
+
 body.oled section#mobile > .container > .item#live > .backdrop {
   /* styling */
   background: initial;
@@ -108,12 +112,13 @@ section#mobile > .container > .item#live img.background {
 
   /* image */
   object-fit: cover;
-  filter: blur(10px) brightness(0.75);
+  filter: blur(5px) brightness(0.65);
+  scale: 1.05;
 }
 
 body.oled section#mobile > .container > .item#live img.background {
   /* styling */
-  filter: blur(10px) brightness(0.35);
+  opacity: 0;
 }
 
 section#mobile > .container > .item#live .ident {
@@ -155,6 +160,10 @@ section#mobile > .container > .item#live .info {
   gap: 10px;
 }
 
+body.oled section#mobile > .container > .item#live .info {
+  padding: 0;
+}
+
 section#mobile > .container > .item#live .info > img {
   /* sizing */
   --_size: 100px;
@@ -194,18 +203,21 @@ section#mobile > .container > .item#live .info span.subTitle {
 
 section#mobile > .container > .item#live .dj {
   /* position */
-  position: relative;
+  position: absolute;
+  inset: 0;
+  bottom: auto;
   z-index: 1;
 
   /* sizing */
+  --_margin: 5px;
   height: fit-content;
   padding: 10px;
-  margin: 5px;
+  margin: var(--_margin);
 
   /* flex */
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
 
   /* styling */
@@ -218,6 +230,7 @@ body.oled section#mobile > .container > .item#live .dj {
   background: initial;
   outline: 3px solid var(--background-color-100);
   outline-offset: -3px;
+  --_margin: 0px;
 }
 
 section#mobile > .container > .item#live .dj img {
@@ -250,7 +263,7 @@ section#mobile > .container > .item#live .dj .about .title {
   line-height: 1;
 
   /* styling */
-  color: var(--dnu-light-color-100);
+  color: var(--foreground-color-100);
 }
 
 section#mobile > .container > .item#live .dj .about .subTitle {
@@ -260,12 +273,42 @@ section#mobile > .container > .item#live .dj .about .subTitle {
   line-height: 1;
 
   /* styling */
-  color: var(--dnu-light-color-100);
+  color: var(--foreground-color-100);
 }
 
 section#mobile > .container > .item#live .dj .about .subTitle * {
   padding: 0;
   margin: 0;
+}
+
+section#mobile > .container > .item#live .dj[data-count="0"],
+section#mobile > .container > .item#live .dj[data-count="2"] {
+  animation: slide-out 0.5s linear forwards;
+}
+
+section#mobile > .container > .item#live .dj[data-count="1"],
+section#mobile > .container > .item#live .dj[data-count="3"] {
+  animation: slide-in 0.5s linear forwards;
+}
+
+@keyframes slide-in {
+  from {
+    translate: calc(100% + var(--_margin));
+  }
+
+  to {
+    translate: 0;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    translate: 0;
+  }
+  
+  to {
+    translate: calc(-100% - var(--_margin));
+  }
 }
 
 section#mobile > .container > button.item {
@@ -330,7 +373,7 @@ section#mobile > .container > button.item#station > .info span.title {
   line-height: 1;
 
   /* styling */
-  color: var(--dnu-light-color-100);
+  color: var(--foreground-color-100);
 }
 
 section#mobile > .container > button.item#station > .info span.subTitle {
@@ -340,7 +383,7 @@ section#mobile > .container > button.item#station > .info span.subTitle {
   line-height: 1;
 
   /* styling */
-  color: var(--dnu-light-color-100);
+  color: var(--foreground-color-100);
 }
 section#mobile > .container > button.item > svg {
   /* sizing */
