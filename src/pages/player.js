@@ -187,13 +187,15 @@ export function Player(propsIn) {
     if (nowPlaying === undefined || audioUrlState === "") return;
 
     if ("mediaSession" in navigator) {
-      if (count % 2 === 0) {
+      if (count % 3 === 0 || (count - 1) % 3 === 0) {
         if (navigator.mediaSession.metadata?.title === dj?.details) return;
         navigator.mediaSession.metadata = new MediaMetadata({
           title: dj?.details ? dj?.details : props.station,
           artist: dj?.displayname ? dj?.displayname : "ReactRadio",
           album: props.station + " | ReactRadio",
-          artwork: dj.avatar ? [{ src: dj.avatar }] : [{ src: "http://mobile.reactradio.dev/apple-touch-icon.png?v=3" }],
+          artwork: dj.avatar
+            ? [{ src: !props.apiLive ? "https://simulatorradio.com/processor/avatar?size=256&name=" + dj.avatar : dj.avatar }]
+            : [{ src: "http://mobile.reactradio.dev/apple-touch-icon.png?v=3" }],
         });
       } else {
         if (navigator.mediaSession.metadata?.title === nowPlaying.title) return;
@@ -257,6 +259,7 @@ export function Player(propsIn) {
         <meta name="twitter:description" content={props.station + " on ReactRadio | A lightweight react based website for streaming radio."} />
       </Helmet>
       <section id="mobile" onLoad={() => setTicking(true)}>
+        {nowPlaying?.art && <img src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} className="background" />}
         <ul className="container">
           <div className="item" id="live">
             {nowPlaying?.art && <img src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} className="background" />}
@@ -330,7 +333,7 @@ export function Player(propsIn) {
               </div>
             )}
           </div>
-          <button className={"item " + state} onClick={() => live()} title="Live" tabIndex={showStations ? -1 : 0}>
+          <button className={"item " + state} onClick={() => live()} title="Live" id="liveBtn" tabIndex={showStations ? -1 : 0}>
             {state === "play" && (
               <svg viewBox="0 0 24 24">
                 <path d="M0 0h24v24H0z" fill="none" />
@@ -349,7 +352,7 @@ export function Player(propsIn) {
             )}
           </button>
           {state === "play" && (
-            <button className="item" onClick={() => stop()} title="Stop" tabIndex={showStations ? -1 : 0}>
+            <button className="item" onClick={() => stop()} title="Stop" id="stopBtn" tabIndex={showStations ? -1 : 0}>
               <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24">
                 <g>
                   <rect fill="none" height="24" />

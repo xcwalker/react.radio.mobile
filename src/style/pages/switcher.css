@@ -7,19 +7,24 @@ section#switcher {
   /* sizing */
   height: 100dvh;
   padding: 10px;
+
+  --_outer_border-radius: 1rem;
+  --_inner_border-radius: 0.5rem;
+  --_inside_border-radius: calc(var(--_outer_border-radius) / 2);
+  --_inside-inner_border-radius: calc(var(--_inner_border-radius) / 2);
 }
 
 section#switcher > div.container {
   /* sizing */
   height: 100%;
-  padding: 10px;
+  padding: var(--_inside_border-radius);
   overflow-x: scroll;
 
   /* flex */
   display: flex;
 
   /* styling */
-  border-radius: 10px;
+  border-radius: var(--_outer_border-radius);
   background-color: var(--background-color-200);
 }
 
@@ -53,7 +58,7 @@ section#switcher > div.container > ul > li {
   height: 25dvh;
 
   /* styling */
-  border-radius: 10px;
+  border-radius: var(--_inside_border-radius);
   background: var(--background-color-100);
   overflow: hidden;
 }
