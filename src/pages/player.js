@@ -187,7 +187,7 @@ export function Player(propsIn) {
     if (nowPlaying === undefined || audioUrlState === "") return;
 
     if ("mediaSession" in navigator) {
-      if (count % 3 === 0 || (count - 1) % 3 === 0) {
+      if (count % 5 === 0 || (count - 1) % 5  === 0) {
         if (navigator.mediaSession.metadata?.title === dj?.details) return;
         navigator.mediaSession.metadata = new MediaMetadata({
           title: dj?.details ? dj?.details : props.station,
@@ -196,6 +196,7 @@ export function Player(propsIn) {
           artwork: dj.avatar
             ? [{ src: !props.apiLive ? "https://simulatorradio.com/processor/avatar?size=256&name=" + dj.avatar : dj.avatar }]
             : [{ src: "http://mobile.reactradio.dev/apple-touch-icon.png?v=3" }],
+          duration: Infinity,
         });
       } else {
         if (navigator.mediaSession.metadata?.title === nowPlaying.title) return;
@@ -204,6 +205,7 @@ export function Player(propsIn) {
           artist: nowPlaying.artists ? nowPlaying.artists : "ReactRadio",
           album: props.station + " | ReactRadio",
           artwork: nowPlaying.art ? [{ src: nowPlaying.art }] : [{ src: "http://mobile.reactradio.dev/apple-touch-icon.png?v=3" }],
+          duration: Infinity,
         });
       }
 
@@ -388,6 +390,7 @@ export function Player(propsIn) {
       </section>
       {showStations && <Switcher station={props.station} setShowStations={setShowStations} />}
       <audio src={audioUrlState} id="audioPlayer" autoPlay="autoplay" crossOrigin="anonymous" />
+      {/* onWaiting={() => alert("Waiting!")} */}
     </>
   );
 }
