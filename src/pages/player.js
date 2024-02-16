@@ -9,6 +9,7 @@ import "../style/pages/switcher.css";
 
 import { stations } from "../App";
 import NoSleep from "nosleep.js";
+import CrossfadeImage from "react-crossfade-image";
 
 var noSleep = new NoSleep();
 
@@ -261,10 +262,24 @@ export function Player(propsIn) {
         <meta name="twitter:description" content={props.station + " on ReactRadio | A lightweight react based website for streaming radio."} />
       </Helmet>
       <section id="mobile" onLoad={() => setTicking(true)}>
-        {nowPlaying?.art && <img src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} className="background" />}
+        {nowPlaying?.art && (
+          <CrossfadeImage
+            src={nowPlaying?.art}
+            alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists}
+            containerClass="background"
+            style={{ width: "100%", height: "100%" }}
+          />
+        )}
         <ul className="container">
           <div className="item" id="live">
-            {nowPlaying?.art && <img src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} className="background" />}
+            {nowPlaying?.art && (
+              <CrossfadeImage
+                src={nowPlaying?.art}
+                alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists}
+                containerClass="background"
+                style={{ width: "100%", height: "100%" }}
+              />
+            )}
             <div className="backdrop">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135.47 135.47">
                 <path d="m0 0 45.155 45.155h45.156V90.31h45.155V45.155L90.311 0zm90.311 90.311L45.155 45.156v45.155l45.156 45.156h45.155zm-45.156 0L0 45.156v90.311h45.155z" />
@@ -274,12 +289,13 @@ export function Player(propsIn) {
             {(nowPlaying?.title || nowPlaying?.artists || nowPlaying?.art) && (
               <div className="info">
                 {nowPlaying?.art && (
-                  <img
+                  <CrossfadeImage
                     src={nowPlaying?.art}
                     alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists}
                     onClick={() => {
                       params.get("oled") !== null ? setParams({}) : setParams({ oled: undefined });
                     }}
+                    containerClass="fix"
                   />
                 )}
                 {(nowPlaying?.title || nowPlaying?.artists) && (

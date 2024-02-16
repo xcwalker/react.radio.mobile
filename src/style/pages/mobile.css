@@ -18,23 +18,25 @@ section#mobile * {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-section#mobile > img.background {
+section#mobile > .background {
   --_pad: 15rem;
   /* position */
-  position: fixed;
+  position: fixed !important;
   inset: calc(-1 * (var(--_pad) / 2));
   z-index: -1;
 
   /* sizing */
   width: calc(100% + var(--_pad));
   height: calc(100% + var(--_pad));
+  max-width: unset !important;
+  max-height: unset !important;
 
   /* styling */
   filter: blur(50px) brightness(0.5);
   object-fit: cover;
 }
 
-body.oled section#mobile > img.background {
+body.oled section#mobile > .background {
   opacity: 0;
 }
 
@@ -111,9 +113,9 @@ body.oled section#mobile > .container > .item#live:not(:has(img)) {
   outline-offset: -3px;
 }
 
-section#mobile > .container > .item#live img.background {
+section#mobile > .container > .item#live .background {
   /* position */
-  position: absolute;
+  position: absolute !important;
   inset: 0;
   z-index: -1;
 
@@ -128,7 +130,7 @@ section#mobile > .container > .item#live img.background {
   /* filter: blur(5vw) brightness(0.65); */
 }
 
-body.oled section#mobile > .container > .item#live img.background {
+body.oled section#mobile > .container > .item#live .background {
   /* styling */
   opacity: 0;
 }
@@ -176,7 +178,11 @@ body.oled section#mobile > .container > .item#live .info {
   padding: 0;
 }
 
-section#mobile > .container > .item#live .info > img {
+section#mobile > .container > .item#live .info > .fix {
+  display: flex;
+}
+
+section#mobile > .container > .item#live .info img {
   /* sizing */
   --_size: 100px;
   height: var(--_size);
@@ -354,7 +360,8 @@ section#mobile > .container > button.item:focus-visible {
 
 section#mobile > .container > button.item:active {
   /* styling */
-  background: var(--background-color-300);
+  /* background: var(--background-color-300); */
+  backdrop-filter: brightness(0.75) blur(10px);
 }
 
 body.oled section#mobile > .container > button.item {
@@ -445,7 +452,7 @@ section#mobile > .container > button.item > svg {
     border-bottom-right-radius: var(--_inner_border-radius);
   }
 
-  section#mobile > .container > .item#live .info > img {
+  section#mobile > .container > .item#live .info img {
     border-radius: var(--_inside_border-radius);
   }
 }
