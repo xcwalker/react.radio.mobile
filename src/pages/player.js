@@ -6,6 +6,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import "../style/pages/mobile.css";
 import "../style/pages/switcher.css";
+import "../style/pages/artView.css";
 
 import { stations } from "../App";
 import NoSleep from "nosleep.js";
@@ -42,10 +43,10 @@ export function Player(propsIn) {
   }, [props, propsIn]);
 
   useEffect(() => {
-    if (params.get("oled") !== null) {
-      document.body.classList.add("oled");
-    } else if (document.body.classList.contains("oled")) {
-      document.body.classList.remove("oled");
+    if (params.get("artView") === "true") {
+      document.body.classList.add("artView");
+    } else if (document.body.classList.contains("artView")) {
+      document.body.classList.remove("artView");
     }
   }, [params]);
 
@@ -188,7 +189,7 @@ export function Player(propsIn) {
     if (nowPlaying === undefined || audioUrlState === "") return;
 
     if ("mediaSession" in navigator) {
-      if (count % 5 === 0 || (count - 1) % 5  === 0) {
+      if (count % 5 === 0 || (count - 1) % 5 === 0) {
         if (navigator.mediaSession.metadata?.title === dj?.details) return;
         navigator.mediaSession.metadata = new MediaMetadata({
           title: dj?.details ? dj?.details : props.station,
@@ -261,6 +262,30 @@ export function Player(propsIn) {
         <meta name="description" content={props.station + " on ReactRadio | A lightweight react based website for streaming radio."} />
         <meta name="twitter:description" content={props.station + " on ReactRadio | A lightweight react based website for streaming radio."} />
       </Helmet>
+      <section id="artView">
+        <div className="container">
+          <button
+          tabIndex={params.get("artView") === "true" ? 0 : -1}
+            onClick={(e) => {
+              e.preventDefault();
+              params.get("artView") !== null ? setParams({}) : setParams({ artView: true });
+            }}
+          >
+            <CrossfadeImage
+              src={nowPlaying?.art}
+              alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists}
+              containerClass="image"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </button>
+          {(nowPlaying?.title || nowPlaying?.artists) && (
+            <div className="text">
+              <span className="title">{nowPlaying?.title}</span>
+              <span className="subTitle">{nowPlaying?.artists}</span>
+            </div>
+          )}
+        </div>
+      </section>
       <section id="mobile" onLoad={() => setTicking(true)}>
         {nowPlaying?.art && (
           <CrossfadeImage
@@ -288,16 +313,16 @@ export function Player(propsIn) {
             {!(nowPlaying?.title || nowPlaying?.artists || nowPlaying?.art) && <span className="ident">{props.station}</span>}
             {(nowPlaying?.title || nowPlaying?.artists || nowPlaying?.art) && (
               <div className="info">
-                {nowPlaying?.art && (
-                  <CrossfadeImage
-                    src={nowPlaying?.art}
-                    alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists}
-                    onClick={() => {
-                      params.get("oled") !== null ? setParams({}) : setParams({ oled: undefined });
-                    }}
-                    containerClass="fix"
-                  />
-                )}
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    params.get("artView") !== null ? setParams({}) : setParams({ artView: true });
+                  }}
+                >
+                  {nowPlaying?.art && (
+                    <CrossfadeImage src={nowPlaying?.art} alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists} containerClass="fix" />
+                  )}
+                </button>
                 {(nowPlaying?.title || nowPlaying?.artists) && (
                   <div className="text">
                     <span className="title">{nowPlaying?.title}</span>

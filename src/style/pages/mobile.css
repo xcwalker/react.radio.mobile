@@ -182,7 +182,19 @@ body.oled section#mobile > .container > .item#live .info {
   padding: 0;
 }
 
-section#mobile > .container > .item#live .info > .fix {
+section#mobile > .container > .item#live .info button {
+  /* sizing */
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+
+  /* styling */
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+section#mobile > .container > .item#live .info .fix {
   display: flex;
 }
 

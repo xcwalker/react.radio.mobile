@@ -1,0 +1,112 @@
+body.artView section#mobile > .container {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body section#artView {
+  opacity: 0;
+  pointer-events: none;
+
+}
+
+body.artView section#artView {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+section#artView,
+section#mobile > .container {
+  transition: opacity 0.5s ease;
+}
+
+section#artView {
+  /* position */
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+section#artView > .container {
+  /* sizing */
+  height: 100%;
+  width: 100%;
+  padding: 1.5rem;
+
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+section#artView > .container button {
+  /* sizing */
+  padding: 0;
+  margin: 0;
+  aspect-ratio: 1/1 !important;
+  width: min(100%,max(400px,60vmin));
+
+
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* styling */
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+section#artView > .container .image {
+  /* sizing */
+  width: 100%;
+  height: 100%;
+
+  /* flex */
+  display: flex;
+}
+
+section#artView > .container .image img {
+  /* sizing */
+  width: 100%;
+  height: 100%;
+
+  /* styling */
+  object-fit: cover;
+  border-radius: 1rem;
+  overflow: clip;
+}
+
+section#artView > .container .text {
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+
+  /* styling */
+  text-align: center;
+}
+
+section#artView > .container .text span.title {
+  /* text */
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+
+  /* styling */
+  color: var(--dnu-light-color-100);
+}
+section#artView > .container .text span.subTitle {
+  /* text */
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+
+  /* styling */
+  color: var(--dnu-light-color-100);
+}
