@@ -36,8 +36,8 @@ export function Player(propsIn) {
   useEffect(() => {
     setProps(propsIn);
     if (props !== propsIn) {
-      setNowPlaying();
-      setDJ();
+      // setNowPlaying();
+      // setDJ();
     }
   }, [props, propsIn]);
 
@@ -245,7 +245,7 @@ export function Player(propsIn) {
         }
       });
     }
-  }, [nowPlaying, audioUrlState, props.audioUrl, navigate, props.station, stationIndex, count, dj]);
+  }, [nowPlaying, audioUrlState, props.audioUrl, props.apiLive, navigate, props.station, stationIndex, count, dj]);
 
   return (
     <>

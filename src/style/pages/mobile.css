@@ -124,7 +124,6 @@ section#mobile > .container > .item#live .background {
   height: 100%;
 
   /* image */
-  object-fit: cover;
   filter: blur(7.5px) brightness(0.65);
   scale: 1.05;
   /* filter: blur(5vw) brightness(0.65); */
@@ -133,6 +132,11 @@ section#mobile > .container > .item#live .background {
 body.oled section#mobile > .container > .item#live .background {
   /* styling */
   opacity: 0;
+}
+
+section#mobile > .container > .item#live .background > img {
+  /* image */
+  object-fit: cover;
 }
 
 section#mobile > .container > .item#live .ident {
