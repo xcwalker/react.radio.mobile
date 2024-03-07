@@ -27,6 +27,8 @@ export function Player(propsIn) {
   const [showStations, setShowStations] = useState(false);
   const [stationIndex, setStationIndex] = useState();
   const [djCount, setDJCount] = useState(0);
+  const [fetching, setFetching] = useState(false);
+  const [fetchCount, setFetchCount] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +53,8 @@ export function Player(propsIn) {
   }, [params]);
 
   useEffect(() => {
+    if (fetching || fetchCount === count) return;
+    setFetching(true);
     fetch(props.apiUrl)
       .then(
         (data) => {
@@ -143,8 +147,12 @@ export function Player(propsIn) {
       )
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setFetching(false);
+        setFetchCount(count);
       });
-  }, [count, props]);
+  }, [count, props, fetching, fetchCount]);
 
   useEffect(() => {
     const timer = setTimeout(() => ticking && setCount(count + 1), 3000);
@@ -264,20 +272,22 @@ export function Player(propsIn) {
       </Helmet>
       <section id="artView">
         <div className="container">
-          <button
-          tabIndex={params.get("artView") === "true" ? 0 : -1}
-            onClick={(e) => {
-              e.preventDefault();
-              params.get("artView") !== null ? setParams({}) : setParams({ artView: true });
-            }}
-          >
-            <CrossfadeImage
-              src={nowPlaying?.art}
-              alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists}
-              containerClass="image"
-              style={{ width: "100%", height: "100%" }}
-            />
-          </button>
+          <div className="fix">
+            <button
+              tabIndex={params.get("artView") === "true" ? 0 : -1}
+              onClick={(e) => {
+                e.preventDefault();
+                params.get("artView") !== null ? setParams({}) : setParams({ artView: true });
+              }}
+            >
+              <CrossfadeImage
+                src={nowPlaying?.art}
+                alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists}
+                containerClass="image"
+                style={{ width: "100%", height: "100%" }}
+              />
+            </button>
+          </div>
           {(nowPlaying?.title || nowPlaying?.artists) && (
             <div className="text">
               <span className="title">{nowPlaying?.title}</span>
@@ -291,7 +301,7 @@ export function Player(propsIn) {
           <CrossfadeImage
             src={nowPlaying?.art}
             alt={"The artwork of " + nowPlaying?.title + " by " + nowPlaying?.artists}
-            containerClass="background"
+            containerClass="background animated"
             style={{ width: "100%", height: "100%" }}
           />
         )}
