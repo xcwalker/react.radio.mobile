@@ -14,14 +14,38 @@ export default function App() {
         <ScrollToTop />
 
         <Routes>
-          <Route path="/" element={<Navigate to="/station/simulator-radio" />} />
-          <Route path="sr" element={<Navigate to="/station/simulator-radio" />} />
-          <Route path="srrock" element={<Navigate to="/station/simulator-radio-rock" />} />
-          <Route path="sr-rock" element={<Navigate to="/station/simulator-radio-rock" />} />
-          <Route path="srdance" element={<Navigate to="/station/simulator-radio-dance" />} />
-          <Route path="sr-dance" element={<Navigate to="/station/simulator-radio-dance" />} />
-          <Route path="srxmas" element={<Navigate to="/station/simulator-radio-xmas" />} />
-          <Route path="sr-xmas" element={<Navigate to="/station/simulator-radio-xmas" />} />
+          <Route
+            path="/"
+            element={<Navigate to="/station/simulator-radio" />}
+          />
+          <Route
+            path="sr"
+            element={<Navigate to="/station/simulator-radio" />}
+          />
+          <Route
+            path="srrock"
+            element={<Navigate to="/station/simulator-radio-rock" />}
+          />
+          <Route
+            path="sr-rock"
+            element={<Navigate to="/station/simulator-radio-rock" />}
+          />
+          <Route
+            path="srdance"
+            element={<Navigate to="/station/simulator-radio-dance" />}
+          />
+          <Route
+            path="sr-dance"
+            element={<Navigate to="/station/simulator-radio-dance" />}
+          />
+          <Route
+            path="srxmas"
+            element={<Navigate to="/station/simulator-radio-xmas" />}
+          />
+          <Route
+            path="sr-xmas"
+            element={<Navigate to="/station/simulator-radio-xmas" />}
+          />
 
           <Route path="station">
             <Route
@@ -66,6 +90,8 @@ export default function App() {
                   audioUrl="https://simulatorradio.stream/xmas"
                   apiUrl="https://apiv2.simulatorradio.com/xmas/nowplaying"
                   apiHistoryUrl="https://apiv2.simulatorradio.com/xmas/history?page=1&pagesize="
+                  season="christmas"
+                  fallback="simulator-radio"
                 />
               }
             />
@@ -81,8 +107,14 @@ export default function App() {
                 />
               }
             />
-            <Route path="srrock" element={<Navigate to="../simulator-radio-rock" />} />
-            <Route path="sr-rock" element={<Navigate to="../simulator-radio-rock" />} />
+            <Route
+              path="srrock"
+              element={<Navigate to="../simulator-radio-rock" />}
+            />
+            <Route
+              path="sr-rock"
+              element={<Navigate to="../simulator-radio-rock" />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -116,6 +148,7 @@ export const stations = [
   {
     station: "SR Xmas",
     url: "/station/simulator-radio-xmas",
+    season: "christmas"
   },
   {
     station: "Truckers FM",

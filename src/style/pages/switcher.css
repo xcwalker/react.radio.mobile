@@ -113,22 +113,33 @@ section#switcher > div.container > ul > li:active {
   background: var(--background-color-300);
 }
 
-section#switcher > div.container > ul > li > button .indicator {
+section#switcher > div.container > ul > li .indicator {
   /* position */
   position: absolute;
-  inset: 5px;
+  inset: 0;
   bottom: auto;
+  z-index: 0;
 
   /* sizing */
-  padding: 4px 10px;
+  padding: 0.25rem 1rem;
 
   /* text */
-  font-size: 12px;
+  font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
+  text-align: center;
 
   /* styling */
-  border-radius: 5px;
+  /* border-radius: 5px; */
   color: white;
   background-color: red;
+}
+
+section#switcher > div.container > ul > li .indicator.seasonal {
+  color: white;
+  background-color: rgb(3, 147, 39);
+}
+
+section#switcher > div.container > ul > li .indicator + .indicator {
+  top: 1.3rem;
 }
