@@ -18,6 +18,7 @@ export function Player(propsIn) {
   const [props, setProps] = useState({});
   const [params, setParams] = useSearchParams();
   const [dj, setDJ] = useState();
+  const [djNext, setDJNext] = useState();
   const [oldDJ, setOldDJ] = useState();
   const [djSr, setDJSr] = useState();
   const [nowPlaying, setNowPlaying] = useState();
@@ -30,6 +31,7 @@ export function Player(propsIn) {
   const [djCount, setDJCount] = useState(0);
   const [fetching, setFetching] = useState(false);
   const [fetchCount, setFetchCount] = useState(0);
+  const [date, setDate] = useState(new Date());
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,8 +62,13 @@ export function Player(propsIn) {
       .then(
         (data) => {
           data.json().then((res) => {
+            if (process.env.REACT_APP_IS_DEBUG) console.log(res);
+
+            setDate(new Date())
+
             let outNow = {};
             let outDJ = {};
+            let outDJNext = {};
 
             if (res?.now_playing?.title) {
               outNow.title = res?.now_playing?.title;
@@ -106,6 +113,19 @@ export function Player(propsIn) {
                 outDJ.details = res.djs.now.details;
               }
 
+              
+              if (res?.djs?.next?.displayname) {
+                outDJNext.displayname = res.djs.next.displayname;
+              }
+
+              if (res?.djs?.next?.avatar) {
+                outDJNext.avatar = res.djs.next.avatar;
+              }
+
+              if (res?.djs?.next?.details) {
+                outDJNext.details = res.djs.next.details;
+              }
+
               setDJ((dj) => {
                 if (
                   dj &&
@@ -118,9 +138,13 @@ export function Player(propsIn) {
                 }
                 return outDJ;
               });
+
+              setDJNext(outDJNext);
             } else {
               fetch(props.apiLive).then((data) => {
                 data.json().then((res) => {
+                  if (process.env.REACT_APP_IS_DEBUG) console.log(res);
+
                   if (res?.data?.user?.name) {
                     outDJ.displayname = res.data.user.name;
                   }
@@ -178,6 +202,8 @@ export function Player(propsIn) {
     fetch("https://apiv2.simulatorradio.com/metadata/combined").then(
       (data) => {
         data.json().then((res) => {
+          if (process.env.REACT_APP_IS_DEBUG) console.log(res);
+
           let outDJ = {};
 
           if (res?.djs?.now?.displayname) {
@@ -325,8 +351,6 @@ export function Player(propsIn) {
     dj,
   ]);
 
-  const date = new Date();
-
   return (
     <>
       {props.season && props.season === "christmas" && date.getMonth() < 10 && (
@@ -416,6 +440,11 @@ export function Player(propsIn) {
               BigTop30 Now Live On Simulator Radio
             </Link>
           )}
+        {djNext && date.getMinutes() >= 50 &&  (
+          <div className="banner">
+            Up next • {djNext.details.replace(".", "")} • {djNext.displayname}
+          </div>
+        )}
         {nowPlaying?.art && (
           <CrossfadeImage
             src={nowPlaying?.art}
