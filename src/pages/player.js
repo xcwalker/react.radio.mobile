@@ -24,6 +24,7 @@ export function Player(propsIn) {
   const [props, setProps] = useState({});
   const [params] = useSearchParams();
   const [dj, setDJ] = useState();
+  const [djNext, setDJNext] = useState();
   const [oldDJ, setOldDJ] = useState();
   const [djSr, setDJSr] = useState();
   const [nowPlaying, setNowPlaying] = useState();
@@ -36,6 +37,7 @@ export function Player(propsIn) {
   const [djCount, setDJCount] = useState(0);
   const [fetching, setFetching] = useState(false);
   const [fetchCount, setFetchCount] = useState(0);
+  const [date, setDate] = useState(new Date());
   const navigate = useNavigate();
 
   // no scroll
@@ -135,8 +137,6 @@ export function Player(propsIn) {
     count,
     dj,
   ]);
-
-  const date = new Date();
 
   return (
     <>
