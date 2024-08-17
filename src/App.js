@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes, Navigate, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { useEffect } from "react";
 
 import { Player } from "./pages/player";
@@ -148,7 +154,7 @@ export const stations = [
   {
     station: "SR Xmas",
     url: "/station/simulator-radio-xmas",
-    season: "christmas"
+    season: "christmas",
   },
   {
     station: "Truckers FM",

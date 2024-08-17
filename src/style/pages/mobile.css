@@ -274,9 +274,13 @@ section#mobile > .container > .item#live .dj {
   align-items: center;
   gap: 10px;
 
+  /* text */
+  text-align: left;
+
   /* styling */
   border-radius: var(--_inside_border-radius);
-  /* background: var(--background-color-200); */
+  background: transparent;
+  border: none;
   backdrop-filter: brightness(1.25) blur(10px);
 }
 
