@@ -1,0 +1,25 @@
+.container {
+  /* sizing */
+  width: 100%;
+  height: min-content;
+
+  /* flex */
+  display: flex;
+  flex-direction: column;
+}
+
+.banner {
+  /* sizing */
+  padding: 0.5rem 1rem;
+
+  /* styling */
+  background: var(--banner-color, red);
+  color: white;
+
+  /* text */
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+}

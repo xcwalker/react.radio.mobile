@@ -1,27 +1,23 @@
-import CrossfadeImage from "react-crossfade-image";
+import { useSearchParams } from "react-router-dom";
+import LowerBarNowPlaying from "../nowPlaying/lowerBar";
+import Timetable from "../timetable/timetable";
 
 export default function ControlView(props) {
+  const [_params, setParams] = useSearchParams();
+
   return (
     <section id="controls">
       <div className="container">
-        <div className="playing">
-          <CrossfadeImage
-            src={props.nowPlaying?.art}
-            alt={
-              "The artwork of " +
-              props.nowPlaying?.title +
-              " by " +
-              props.nowPlaying?.artists
-            }
-            containerClass="image"
-          />
-          {(props.nowPlaying?.title || props.nowPlaying?.artists) && (
-            <div className="text">
-              <span className="title">{props.nowPlaying?.title}</span>
-              <span className="subTitle">{props.nowPlaying?.artists}</span>
-            </div>
-          )}
-        </div>
+        <Timetable apiTimetableUrl={props.apiTimetableUrl} />
+        <button
+          className="playing"
+          onClick={(e) => {
+            e.preventDefault();
+            setParams({});
+          }}
+        >
+          <LowerBarNowPlaying nowPlaying={props.nowPlaying} />
+        </button>
       </div>
     </section>
   );

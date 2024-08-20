@@ -9,7 +9,9 @@ export default function fetchNowPlaying(
   setDJ,
   setDJCount,
   setOldDJ,
-setNowPlaying
+  setNowPlaying,
+  setDate,
+  setDJNext
 ) {
   if (fetching || fetchCount === count) return;
   setFetching(true);
@@ -17,8 +19,13 @@ setNowPlaying
     .then(
       (data) => {
         data.json().then((res) => {
+          if (process.env.REACT_APP_IS_DEBUG) console.log(res);
+
+          setDate(new Date());
+          
           let outNow = {};
           let outDJ = {};
+          let outDJNext = {};
 
           if (res?.now_playing?.title) {
             outNow.title = res?.now_playing?.title;
@@ -65,6 +72,18 @@ setNowPlaying
               outDJ.details = res.djs.now.details;
             }
 
+            if (res?.djs?.next?.displayname) {
+              outDJNext.displayname = res.djs.next.displayname;
+            }
+
+            if (res?.djs?.next?.avatar) {
+              outDJNext.avatar = res.djs.next.avatar;
+            }
+
+            if (res?.djs?.next?.details) {
+              outDJNext.details = res.djs.next.details;
+            }
+
             setDJ((dj) => {
               if (
                 dj &&
@@ -77,9 +96,13 @@ setNowPlaying
               }
               return outDJ;
             });
+
+            setDJNext(outDJNext);
           } else {
             fetch(apiLive).then((data) => {
               data.json().then((res) => {
+                if (process.env.REACT_APP_IS_DEBUG) console.log(res);
+
                 if (res?.data?.user?.name) {
                   outDJ.displayname = res.data.user.name;
                 }

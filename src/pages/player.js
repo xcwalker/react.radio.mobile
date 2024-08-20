@@ -17,6 +17,7 @@ import Switcher from "../components/switcher";
 import updateMedia from "../functions/UpdateMedia";
 import fetchNowPlaying from "../functions/FetchNowPlaying";
 import fetchSRDJ from "../functions/FetchSRDJ";
+import Banners from "../components/banners";
 
 var noSleep = new NoSleep();
 
@@ -81,7 +82,9 @@ export function Player(propsIn) {
       setDJ,
       setDJCount,
       setOldDJ,
-      setNowPlaying
+      setNowPlaying,
+      setDate,
+      setDJNext
     );
   }, [count, props, fetching, fetchCount]);
 
@@ -187,8 +190,12 @@ export function Player(propsIn) {
           }
         />
       </Helmet>
+      <Banners djSr={djSr} date={date} djNext={djNext} />
       <ArtView nowPlaying={nowPlaying} />
-      <ControlView nowPlaying={nowPlaying} />
+      <ControlView
+        nowPlaying={nowPlaying}
+        apiTimetableUrl={props.apiTimetableUrl}
+      />
 
       <MobileView
         nowPlaying={nowPlaying}
@@ -206,6 +213,8 @@ export function Player(propsIn) {
         audioUrl={props.audioUrl}
         setAudioUrlState={setAudioUrlState}
         setShowStations={setShowStations}
+        date={date}
+        djNext={djNext}
       />
 
       {showStations && (

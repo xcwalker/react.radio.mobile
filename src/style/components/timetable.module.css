@@ -1,0 +1,173 @@
+/**** Timetable ****/
+.container {
+  /* position */
+  position: relative;
+
+  /* sizing */
+  height: 75vh;
+  width: 100%;
+
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  gap: var(--default-padding);
+
+  /* styling */
+
+  backdrop-filter: brightness(0.75) blur(10px);
+  border-radius: var(--_outer_border-radius);
+  overflow: clip;
+}
+
+.container h2 {
+  /* text */
+  text-align: center;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+}
+
+.container .inline {
+  /* sizing */
+  padding-inline: 0.75rem;
+  /* flex */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--default-padding);
+}
+
+.container .inline button {
+  /* sizing */
+  --size: 25px;
+  width: var(--size);
+  height: var(--size);
+
+  /* flex */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* text */
+  font-size: var(--size);
+
+  /* styling */
+  border-radius: 50%;
+  color: var(--foreground-color-100);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.container .inline button:hover,
+.container .inline button:focus {
+  outline: 2px solid currentColor;
+}
+
+.container ul {
+  /* spacing */
+  padding: 0 0.75rem 0.75rem;
+  margin: 0;
+  overflow-y: scroll;
+
+  /* grid */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+  gap: 0.75rem;
+}
+
+.container ul li {
+  /* sizing */
+  padding-bottom: 0.75rem;
+
+  /* flex */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--default-padding);
+
+  /* transition */
+  border-bottom: 1px solid currentColor;
+  transition: var(--transition-color-600), var(--transition-outline-600);
+}
+
+.container ul li:last-of-type {
+  /* sizing */
+  padding-bottom: 0;
+
+  /* styling */
+  border-bottom: none;
+}
+
+/* OLED */
+body.oled .container ul li {
+  background-color: transparent;
+  outline-color: var(--background-color-100);
+}
+
+.container ul li img {
+  /* sizing */
+  --size: 75px;
+  width: var(--size);
+  height: var(--size);
+  flex-shrink: 0;
+
+  /* styling */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.container ul li .info {
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(var(--default-padding) / 2);
+}
+
+.container ul li .info .inline {
+  /* flex */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--default-padding);
+}
+
+.container ul li .info .inline .title {
+  /* text */
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
+
+  /* styling */
+  color: var(--foreground-color-100);
+}
+
+.container ul li .info .inline .date {
+  /* text */
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+
+  /* styling */
+  color: var(--foreground-color-300);
+}
+
+.container ul li .info .subTitle {
+  /* text */
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+
+  /* styling */
+  color: var(--foreground-color-100);
+}
+
+.container ul li .info .subTitle * {
+  /* spacing */
+  margin: 0;
+  padding: 0;
+}

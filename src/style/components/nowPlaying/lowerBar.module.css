@@ -1,0 +1,51 @@
+.lowerBar {
+  /* sizing */
+  padding: 0.75rem;
+
+  /* flex */
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1rem;
+
+  /* styling */
+  border-radius: var(--_outer_border-radius);
+  backdrop-filter: brightness(0.75) blur(10px);
+}
+
+.lowerBar > .image {
+  /* sizing */
+  aspect-ratio: 1;
+
+  /* flex */
+  display: flex;
+
+  /* styling */
+  overflow: clip;
+  border-radius: var(--_inside_border-radius);
+}
+
+.lowerBar > .text {
+  /* flex */
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  justify-content: center;
+
+  /* text */
+  color: var(--foreground-color-100);
+  text-align: left;
+}
+
+.lowerBar > .text > .title {
+  /* text */
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.lowerBar > .text > .subTitle {
+  /* text */
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+}

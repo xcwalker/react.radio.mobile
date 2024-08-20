@@ -9,12 +9,6 @@ export default function MobileView(props) {
 
   return (
     <section id="mobile" onLoad={() => props.setTicking(true)}>
-      {props.djSr?.displayname === "BigTop30" &&
-        props.station !== "Simulator Radio" && (
-          <Link to={"/station/simulator-radio"} className="banner">
-            BigTop30 Now Live On Simulator Radio
-          </Link>
-        )}
       {props.nowPlaying?.art && (
         <CrossfadeImage
           src={props.nowPlaying?.art}
