@@ -1,0 +1,41 @@
+.lowerBar {
+   background: rgb(0,0,0);
+background: -moz-linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 33%, rgba(0,0,0,0.75) 100%);
+background: -webkit-linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 33%, rgba(0,0,0,0.75) 100%);
+background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 33%, rgba(0,0,0,0.75) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1); 
+}
+
+.lowerBar > .container {
+  padding: 0.5rem;
+}
+
+.lowerBar > .container > ul {
+  /* spacing */
+  margin: 0;
+  padding: 0;
+
+  /* flex */
+  display: flex;
+  justify-content: space-between;
+}
+
+.lowerBar > .container > ul .button {
+  /* sizing */
+  height: 2.5rem;
+  width: 5rem;
+  padding: 0.25rem;
+  margin: 0;
+
+  /* styling */
+  background: transparent;
+  border: none;
+  color: inherit;
+}
+
+.lowerBar > .container > ul .button svg {
+  /* sizing */
+  height: 100%;
+  fill: currentColor;
+  color: inherit;
+}

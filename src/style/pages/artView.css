@@ -48,9 +48,8 @@ section#mobile > .container > .item {
 
 section#artView {
   /* position */
-  position: fixed;
-  inset: 0;
-  z-index: 999;
+  grid-row: 2/2;
+  grid-column: 1/1;
 }
 
 section#artView > .container {
