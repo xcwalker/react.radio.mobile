@@ -50,9 +50,8 @@ export default function Timetable(props) {
           remove
         </button>
         <h3>
-          {displayDate.toLocaleDateString("en-gb", { weekday: "long" })}{" "}
           {displayDate.getDate()}{" "}
-          {displayDate.toLocaleDateString("en-gb", { month: "long" })}{" "}
+          {displayDate.toLocaleDateString("en-gb", { month: "short" })}{" "}
           {displayDate.getFullYear()}
         </h3>
         <button

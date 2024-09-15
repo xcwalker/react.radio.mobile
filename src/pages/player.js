@@ -18,6 +18,7 @@ import updateMedia from "../functions/UpdateMedia";
 import fetchNowPlaying from "../functions/FetchNowPlaying";
 import fetchSRDJ from "../functions/FetchSRDJ";
 import Banners from "../components/banners";
+import LowerBarNavigation from "../components/navigation/lowerBar";
 
 var noSleep = new NoSleep();
 
@@ -216,6 +217,7 @@ export function Player(propsIn) {
         date={date}
         djNext={djNext}
       />
+      <LowerBarNavigation />
 
       {showStations && (
         <Switcher station={props.station} setShowStations={setShowStations} />

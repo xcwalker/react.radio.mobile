@@ -9,15 +9,13 @@ export default function ControlView(props) {
     <section id="controls">
       <div className="container">
         <Timetable apiTimetableUrl={props.apiTimetableUrl} />
-        <button
-          className="playing"
+        <LowerBarNowPlaying
+          nowPlaying={props.nowPlaying}
           onClick={(e) => {
             e.preventDefault();
             setParams({});
           }}
-        >
-          <LowerBarNowPlaying nowPlaying={props.nowPlaying} />
-        </button>
+        />
       </div>
     </section>
   );

@@ -54,6 +54,8 @@ body.controls section#controls .mainTransition {
 section#controls {
   /* sizing */
   height: 100%;
+  max-height: 100%;
+  overflow: scroll;
   grid-row: 2/2;
   grid-column: 1/1;
 
@@ -70,10 +72,8 @@ section#controls > .container {
   width: 100%;
   padding: 0.5rem;
 
-  /* grid */
-  display: grid;
-  grid-template-rows: 1fr calc(4rem + 1rem);
-  gap: 1rem;
+  /* flex */
+  display: flex;
 }
 
 section#controls > .container > button.playing {

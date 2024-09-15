@@ -1,15 +1,22 @@
 .lowerBar {
+  /* position */
+  position: fixed;
+  inset: 0.5rem;
+  top: auto;
+
   /* sizing */
-  padding: 0.75rem;
+  padding: 0.5rem;
 
   /* flex */
   display: grid;
-  grid-template-columns: 3.5rem 1fr;
-  gap: 1rem;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0.75rem;
 
   /* styling */
-  border-radius: var(--_outer_border-radius);
+  border-radius: 0.5rem;
   backdrop-filter: brightness(0.75) blur(10px);
+  background-color: transparent;
+  border: none;
 }
 
 .lowerBar > .image {
@@ -21,15 +28,16 @@
 
   /* styling */
   overflow: clip;
-  border-radius: var(--_inside_border-radius);
+  border-radius: 0.25rem;
 }
 
 .lowerBar > .text {
   /* flex */
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  gap: 0.25rem;
 
   /* text */
   color: var(--foreground-color-100);
@@ -37,10 +45,19 @@
 }
 
 .lowerBar > .text > .title {
+  /* max-width */
+  max-width: 20ch;
+
   /* text */
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1;
+
+  /* overflow */
+  text-wrap: nowrap;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .lowerBar > .text > .subTitle {
@@ -48,4 +65,5 @@
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1;
+  color: var(--foreground-color-300);
 }

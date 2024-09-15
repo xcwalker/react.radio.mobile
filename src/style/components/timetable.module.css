@@ -4,7 +4,7 @@
   position: relative;
 
   /* sizing */
-  height: 75vh;
+  height: 100%;
   width: 100%;
 
   /* flex */
@@ -12,20 +12,14 @@
   flex-direction: column;
   gap: var(--default-padding);
 
-  /* styling */
-
-  backdrop-filter: brightness(0.75) blur(10px);
-  border-radius: var(--_outer_border-radius);
-  overflow: clip;
 }
 
-.container h2 {
+.container h3 {
   /* text */
   text-align: center;
-  font-size: 26px;
+  font-size: 1rem;
   font-weight: 800;
   line-height: 1;
-  text-align: center;
 }
 
 .container .inline {
