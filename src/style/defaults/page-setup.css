@@ -10,7 +10,8 @@
 
 html {
   /* prevents pull down refresh  */
-  overscroll-behavior: none;
+  overscroll-behavior: contain;
+  overflow: hidden;
 }
 
 body {
