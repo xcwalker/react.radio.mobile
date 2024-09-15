@@ -6,7 +6,7 @@ export default function MobileNowPlaying(props) {
   const [params, setParams] = useSearchParams();
   return (
     <div className="item" id="live">
-      {props.nowPlaying.art && (
+      {props?.nowPlaying.art && (
         <CrossfadeImage
           src={props.nowPlaying.art}
           alt={
@@ -26,14 +26,14 @@ export default function MobileNowPlaying(props) {
       </div>
       {/* No Data */}
       {!(
-        props.nowPlaying.title ||
-        props.nowPlaying.artists ||
-        props.nowPlaying.art
+        props?.nowPlaying.title ||
+        props?.nowPlaying.artists ||
+        props?.nowPlaying.art
       ) && <span className="ident">{props.station}</span>}
       {/* Data */}
-      {(props.nowPlaying.title ||
-        props.nowPlaying.artists ||
-        props.nowPlaying.art) && (
+      {(props?.nowPlaying.title ||
+        props?.nowPlaying.artists ||
+        props?.nowPlaying.art) && (
         <div className="info">
           <button
             onClick={(e) => {
