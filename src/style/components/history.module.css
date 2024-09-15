@@ -1,4 +1,4 @@
-/**** Timetable ****/
+/**** History ****/
 .container {
   /* position */
   position: relative;
@@ -122,13 +122,13 @@ body.oled .container ul li {
 
 .container ul li img {
   /* sizing */
-  --size: 75px;
+  --size: 3rem;
   width: var(--size);
   height: var(--size);
   flex-shrink: 0;
 
   /* styling */
-  border-radius: 50%;
+  border-radius: 0.5rem;
   object-fit: cover;
 }
 
@@ -140,38 +140,27 @@ body.oled .container ul li {
   gap: calc(var(--default-padding) / 2);
 }
 
-.container ul li .info .inline {
-  /* flex */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--default-padding);
-}
+.container ul li .info .title {
+  width: 20ch;
 
-.container ul li .info .inline .title {
   /* text */
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 800;
   line-height: 1;
+
+  /* overflow */
+  text-wrap: nowrap;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   /* styling */
   color: var(--foreground-color-100);
 }
 
-.container ul li .info .inline .date {
-  /* text */
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1;
-
-  /* styling */
-  color: var(--foreground-color-300);
-}
-
 .container ul li .info .subTitle {
   /* text */
-  font-size: 16px;
+  font-size: 0.75rem;
   font-weight: 600;
   line-height: 1;
 
@@ -179,8 +168,17 @@ body.oled .container ul li {
   color: var(--foreground-color-100);
 }
 
-.container ul li .info .subTitle * {
-  /* spacing */
-  margin: 0;
-  padding: 0;
+.container ul li .playedBy {
+  /* position */
+  position: absolute;
+  inset: 0;
+  left: auto;
+  bottom: auto;
+  /* text */
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+
+  /* styling */
+  color: var(--foreground-color-100);
 }

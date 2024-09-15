@@ -6,6 +6,7 @@ export default function Button(props) {
       id={props.id}
       tabIndex={props.showStations ? -1 : 0}
       title={props.title}
+      data-count={props.dataCount}
     >
       {props.children}
     </button>

@@ -1,11 +1,12 @@
+import { useSearchParams } from "react-router-dom";
 import Button from "../button";
 
 export default function SwitcherButton(props) {
+  const [_params, setParams] = useSearchParams();
   return (
     <Button
       id="station"
-      onClick={() => props.setShowStations(true)}
-      showStations={props.showStations}
+      onClick={() => setParams({ switcher: true })}
     >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M0 0h24v24H0V0z" fill="none" />

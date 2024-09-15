@@ -1,12 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
 import TimetableDJItem from "./djItem";
 
-import css from "../../style/components/timetable.module.css"
+import css from "../../style/components/timetable.module.css";
 
 export default function Timetable(props) {
   const [displayDate, setDisplayDate] = useState(new Date());
   const [timetable, setTimetable] = useState();
-  const [ticking, setTicking] = useState(true);
+  const [ticking, _setTicking] = useState(true);
   const [count, setCount] = useState(0);
   const [dayIndex, setDayIndex] = useState(0);
 

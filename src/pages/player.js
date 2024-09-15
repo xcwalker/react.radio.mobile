@@ -6,19 +6,21 @@ import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import "../style/pages/mobile.css";
 import "../style/pages/switcher.css";
 import "../style/pages/artView.css";
-import "../style/pages/controls.css";
+import "../style/pages/timetable.css";
+import "../style/pages/history.css";
 
 import { stations } from "../App";
 import NoSleep from "nosleep.js";
 import ArtView from "../components/views/artView";
-import ControlView from "../components/views/controls";
-import MobileView from "../components/views/mobile";
-import Switcher from "../components/switcher";
+import TimetableView from "../components/views/timetableView";
+import MobileView from "../components/views/mobileView";
 import updateMedia from "../functions/UpdateMedia";
 import fetchNowPlaying from "../functions/FetchNowPlaying";
 import fetchSRDJ from "../functions/FetchSRDJ";
 import Banners from "../components/banners";
 import LowerBarNavigation from "../components/navigation/lowerBar";
+import HistoryView from "../components/views/historyView";
+import SwitcherView from "../components/views/switcherView";
 
 var noSleep = new NoSleep();
 
@@ -57,16 +59,28 @@ export function Player(propsIn) {
 
   // enables different views
   useEffect(() => {
+    if (params.get("switcher") === "true") {
+      document.body.classList.add("switcher");
+    } else if (document.body.classList.contains("switcher")) {
+      document.body.classList.remove("switcher");
+    }
+
     if (params.get("artView") === "true") {
       document.body.classList.add("artView");
     } else if (document.body.classList.contains("artView")) {
       document.body.classList.remove("artView");
     }
 
-    if (params.get("controls") === "true") {
-      document.body.classList.add("controls");
-    } else if (document.body.classList.contains("controls")) {
-      document.body.classList.remove("controls");
+    if (params.get("timetable") === "true") {
+      document.body.classList.add("timetable");
+    } else if (document.body.classList.contains("timetable")) {
+      document.body.classList.remove("timetable");
+    }
+
+    if (params.get("history") === "true") {
+      document.body.classList.add("history");
+    } else if (document.body.classList.contains("history")) {
+      document.body.classList.remove("history");
     }
   }, [params]);
 
@@ -85,9 +99,11 @@ export function Player(propsIn) {
       setOldDJ,
       setNowPlaying,
       setDate,
-      setDJNext
+      setDJNext,
+      props.apiDJNext,
+      djCount
     );
-  }, [count, props, fetching, fetchCount]);
+  }, [count, props, fetching, fetchCount, djCount]);
 
   useEffect(() => {
     // update timer
@@ -191,12 +207,44 @@ export function Player(propsIn) {
           }
         />
       </Helmet>
-      <Banners djSr={djSr} date={date} djNext={djNext} />
-      <ArtView nowPlaying={nowPlaying} />
-      <ControlView
+      <Banners
+        djSr={djSr}
+        date={date}
+        djNext={djNext}
+        station={propsIn.station}
+      />
+      <ArtView
+        nowPlaying={nowPlaying}
+        state={state}
+        setState={setState}
+        noSleep={noSleep}
+        showStations={showStations}
+        audioUrl={props.audioUrl}
+        setAudioUrlState={setAudioUrlState}
+        station={props.station}
+      />
+      <TimetableView
         nowPlaying={nowPlaying}
         apiTimetableUrl={props.apiTimetableUrl}
+        state={state}
+        setState={setState}
+        noSleep={noSleep}
+        showStations={showStations}
+        audioUrl={props.audioUrl}
+        setAudioUrlState={setAudioUrlState}
+        station={props.station}
       />
+      <HistoryView
+        nowPlaying={nowPlaying}
+        state={state}
+        setState={setState}
+        noSleep={noSleep}
+        showStations={showStations}
+        audioUrl={props.audioUrl}
+        setAudioUrlState={setAudioUrlState}
+        station={props.station}
+      />
+      <SwitcherView station={props.station} setShowStations={setShowStations} />
 
       <MobileView
         nowPlaying={nowPlaying}
@@ -217,11 +265,8 @@ export function Player(propsIn) {
         date={date}
         djNext={djNext}
       />
-      <LowerBarNavigation />
+      <LowerBarNavigation station={props.station} />
 
-      {showStations && (
-        <Switcher station={props.station} setShowStations={setShowStations} />
-      )}
       <audio
         src={audioUrlState}
         id="audioPlayer"

@@ -1,13 +1,28 @@
-import Button from "../button";
+import Button from "../../button";
 
 export default function StopButton(props) {
+  async function live() {
+    var player = document.querySelector("#audioPlayer");
+
+    if (props.audioUrlState === "") {
+      props.setAudioUrlState(props.audioUrl);
+    }
+
+    if (!player.paused) {
+      await player.load();
+    }
+    props.setState("play");
+    player.play();
+
+    props.noSleep.enable();
+  }
+
   function stop() {
     props.setAudioUrlState("");
     props.setState("paused");
     props.noSleep.disable();
     return;
   }
-
   return (
     <>
       {props.state === "play" && (
@@ -17,10 +32,7 @@ export default function StopButton(props) {
           id="stopBtn"
           showStations={props.showStations}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g>
               <rect fill="none" height="24" />
             </g>

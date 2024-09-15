@@ -3,55 +3,55 @@ body section#mobile {
   overflow: clip;
 }
 
-body.controls section#mobile {
+body.history section#mobile {
   pointer-events: none;
 }
 
-body.controls section#mobile > .container {
+body.history section#mobile > .container {
   scale: 1.3;
   /* scale: 0.7; */
 }
 
-body section#controls {
+body section#history {
   scale: 0.7;
   /* scale: 1.3; */
 }
 
-body.controls section#mobile > .container > .item {
+body.history section#mobile > .container > .item {
   opacity: 0;
 }
 
-body section#controls {
+body section#history {
   /* translate: -100vw 0; */
   /* translate: 0 100vh; */
   pointer-events: none;
 }
 
-body.controls section#controls {
+body.history section#history {
   scale: 1;
   /* translate: 0 0; */
   pointer-events: auto;
 }
 
-section#controls,
-section#controls > .container,
-section#controls .mainTransition {
+section#history,
+section#history > .container,
+section#history .mainTransition {
   --_duration: 0.35s;
   transition: opacity var(--_duration) ease, scale var(--_duration) ease;
   /* transition: translate 0.25s ease-out; */
 }
 
-section#controls .mainTransition {
+section#history .mainTransition {
   opacity: 0;
 }
 
-body.controls section#controls,
-body.controls section#controls > .container,
-body.controls section#controls .mainTransition {
+body.history section#history,
+body.history section#history > .container,
+body.history section#history .mainTransition {
   opacity: 1;
 }
 
-section#controls {
+section#history {
   /* sizing */
   height: 100%;
   max-height: 100%;
@@ -66,7 +66,7 @@ section#controls {
   --_inside-inner_border-radius: calc(var(--_inner_border-radius) / 2);
 }
 
-section#controls > .container {
+section#history > .container {
   /* sizing */
   height: 100%;
   width: 100%;
@@ -76,13 +76,21 @@ section#controls > .container {
   display: flex;
 }
 
-section#controls > .container > button.playing {
-  /* grid */
-  grid-row: 2/2;
+/*** Unsupported ***/
+section#history > .error {
+  /* sizing */
+  width: 100%;
+  height: 100%;
 
-  /* styling */
-  padding: 0;
-  margin: 0;
-  background: transparent;
-  border: none;
+  /* flex */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* text */
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+
 }

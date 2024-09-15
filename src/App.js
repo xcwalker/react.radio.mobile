@@ -110,6 +110,7 @@ export default function App() {
                   apiUrl="https://radiocloud.pro/api/public/v1/song/current"
                   apiLive="https://radiocloud.pro/api/public/v1/presenter/live"
                   apiHistoryUrl="https://radiocloud.pro/api/public/v1/song/recent?limit="
+                  apiDJNext="https://radiocloud.pro/api/public/v1/presenter/summary"
                 />
               }
             />

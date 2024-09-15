@@ -1,11 +1,13 @@
 import CrossfadeImage from "react-crossfade-image";
 
 import css from "../../style/components/nowPlaying/lowerBar.module.css";
+import LiveButton from "./controls/liveButton";
+import StopButton from "../buttons/stop";
 
 export default function LowerBarNowPlaying(props) {
   return (
     <>
-      {!props.onClick && <div className={css.lowerBar + " mainTransition"}>
+      <div className={css.lowerBar + " mainTransition"}>
         <CrossfadeImage
           src={props.nowPlaying?.art}
           alt={
@@ -22,25 +24,24 @@ export default function LowerBarNowPlaying(props) {
             <span className={css.subTitle}>{props.nowPlaying?.artists}</span>
           </div>
         )}
-      </div>}
-      {props.onClick && <button className={css.lowerBar + " mainTransition"} onClick={props.onClick}>
-        <CrossfadeImage
-          src={props.nowPlaying?.art}
-          alt={
-            "The artwork of " +
-            props.nowPlaying?.title +
-            " by " +
-            props.nowPlaying?.artists
-          }
-          containerClass={css.image}
+        <LiveButton
+          state={props.state}
+          setState={props.setState}
+          noSleep={props.noSleep}
+          showStations={props.showStations}
+          audioUrl={props.audioUrl}
+          setAudioUrlState={props.setAudioUrlState}
+          placeholder={true}
         />
-        {(props.nowPlaying?.title || props.nowPlaying?.artists) && (
-          <div className={css.text}>
-            <span className={css.title}>{props.nowPlaying?.title}</span>
-            <span className={css.subTitle}>{props.nowPlaying?.artists}</span>
-          </div>
-        )}
-      </button>}
+        <StopButton
+          state={props.state}
+          setState={props.setState}
+          noSleep={props.noSleep}
+          showStations={props.showStations}
+          audioUrl={props.audioUrl}
+          setAudioUrlState={props.setAudioUrlState}
+        />
+      </div>
     </>
   );
 }

@@ -1,12 +1,10 @@
 import CrossfadeImage from "react-crossfade-image";
-import { Link } from "react-router-dom";
 import LiveButton from "../buttons/live";
 import StopButton from "../buttons/stop";
 import SwitcherButton from "../buttons/switcher";
 import MobileNowPlaying from "../nowPlaying/mobile";
 
 export default function MobileView(props) {
-
   return (
     <section id="mobile" onLoad={() => props.setTicking(true)}>
       {props.nowPlaying?.art && (

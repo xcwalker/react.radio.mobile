@@ -4,7 +4,7 @@ export default function fetchSRDJ(station, setDJSr) {
   fetch("https://apiv2.simulatorradio.com/metadata/combined").then(
     (data) => {
       data.json().then((res) => {
-        if (process.env.REACT_APP_IS_DEBUG) console.log(res);
+        if (process.env.REACT_APP_IS_DEBUG === "true") console.log(res);
 
         let outDJ = {};
 

@@ -6,14 +6,14 @@ export default function MobileNowPlaying(props) {
   const [params, setParams] = useSearchParams();
   return (
     <div className="item" id="live">
-      {props.nowPlaying?.art && (
+      {props.nowPlaying.art && (
         <CrossfadeImage
-          src={props.nowPlaying?.art}
+          src={props.nowPlaying.art}
           alt={
             "The artwork of " +
-            props.nowPlaying?.title +
+            props.nowPlaying.title +
             " by " +
-            props.nowPlaying?.artists
+            props.nowPlaying.artists
           }
           containerClass="background"
           style={{ width: "100%", height: "100%" }}
@@ -26,14 +26,14 @@ export default function MobileNowPlaying(props) {
       </div>
       {/* No Data */}
       {!(
-        props.nowPlaying?.title ||
-        props.nowPlaying?.artists ||
-        props.nowPlaying?.art
+        props.nowPlaying.title ||
+        props.nowPlaying.artists ||
+        props.nowPlaying.art
       ) && <span className="ident">{props.station}</span>}
       {/* Data */}
-      {(props.nowPlaying?.title ||
-        props.nowPlaying?.artists ||
-        props.nowPlaying?.art) && (
+      {(props.nowPlaying.title ||
+        props.nowPlaying.artists ||
+        props.nowPlaying.art) && (
         <div className="info">
           <button
             onClick={(e) => {
@@ -43,53 +43,45 @@ export default function MobileNowPlaying(props) {
                 : setParams({ artView: true });
             }}
           >
-            {props.nowPlaying?.art && (
+            {props.nowPlaying.art && (
               <CrossfadeImage
-                src={props.nowPlaying?.art}
+                src={props.nowPlaying.art}
                 alt={
                   "The artwork of " +
-                  props.nowPlaying?.title +
+                  props.nowPlaying.title +
                   " by " +
-                  props.nowPlaying?.artists
+                  props.nowPlaying.artists
                 }
                 containerClass="fix"
               />
             )}
           </button>
-          {(props.nowPlaying?.title || props.nowPlaying?.artists) && (
+          {(props.nowPlaying.title || props.nowPlaying.artists) && (
             <div className="text">
-              <span className="title">{props.nowPlaying?.title}</span>
-              <span className="subTitle">{props.nowPlaying?.artists}</span>
+              <span className="title">{props.nowPlaying.title}</span>
+              <span className="subTitle">{props.nowPlaying.artists}</span>
             </div>
           )}
         </div>
       )}
       {(props.djCount === 0 ? props.oldDJ : props.dj) && (
         <DJBar
-          avatar={props.djCount === 0 ? props.oldDJ?.avatar : props.dj?.avatar}
+          avatar={props.djCount === 0 ? props.oldDJ.avatar : props.dj.avatar}
           displayName={
-            props.djCount === 0
-              ? props.oldDJ?.displayname
-              : props.dj?.displayname
+            props.djCount === 0 ? props.oldDJ.displayname : props.dj.displayname
           }
-          details={
-            props.djCount === 0 ? props.oldDJ?.details : props.dj?.details
-          }
-          djCount={props.djCount}
+          details={props.djCount === 0 ? props.oldDJ.details : props.dj.details}
+          djCount={props.djCount === 0 ? 1 : 0}
         />
       )}
       {(props.djCount === 0 ? props.dj : props.oldDJ) && (
         <DJBar
-          avatar={props.djCount === 0 ? props.dj?.avatar : props.oldDJ?.avatar}
+          avatar={props.djCount === 0 ? props.dj.avatar : props.oldDJ.avatar}
           displayName={
-            props.djCount === 0
-              ? props.dj?.displayname
-              : props.oldDJ?.displayname
+            props.djCount === 0 ? props.dj.displayname : props.oldDJ.displayname
           }
-          details={
-            props.djCount === 0 ? props.dj?.details : props.oldDJ?.details
-          }
-          djCount={props.djCount}
+          details={props.djCount === 0 ? props.dj.details : props.oldDJ.details}
+          djCount={props.djCount === 0 ? 0 : 1}
         />
       )}
     </div>

@@ -4,12 +4,12 @@ import ReactMarkdown from "react-markdown";
 
 export default function DJBar(props) {
   const [params, setParams] = useSearchParams();
-
+  
   return (
     <Button
       notItem={true}
       className="dj"
-      data-count={props.djCount === 0 ? 1 : 0}
+      dataCount={props.djCount === 0 ? 1 : 0}
       onClick={(e) => {
         e.preventDefault();
         params.get("controls") !== null

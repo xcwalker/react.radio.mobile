@@ -11,7 +11,9 @@ export default function fetchNowPlaying(
   setOldDJ,
   setNowPlaying,
   setDate,
-  setDJNext
+  setDJNext,
+  apiDJNext,
+  djCount
 ) {
   if (fetching || fetchCount === count) return;
   setFetching(true);
@@ -19,10 +21,10 @@ export default function fetchNowPlaying(
     .then(
       (data) => {
         data.json().then((res) => {
-          if (process.env.REACT_APP_IS_DEBUG) console.log(res);
+          if (process.env.REACT_APP_IS_DEBUG === "true") console.log(res);
 
           setDate(new Date());
-          
+
           let outNow = {};
           let outDJ = {};
           let outDJNext = {};
@@ -91,7 +93,12 @@ export default function fetchNowPlaying(
                   dj.avatar !== outDJ.avatar ||
                   dj.details !== outDJ.details)
               ) {
-                setDJCount((count) => (count === 0 ? 1 : 0));
+                setDJCount((count) => {
+                  console.log(dj, outDJ)
+                  console.log(count)
+                  if (count !== djCount) return count
+                  return count === 0 ? 1 : 0;
+                });
                 setOldDJ(dj);
               }
               return outDJ;
@@ -101,7 +108,7 @@ export default function fetchNowPlaying(
           } else {
             fetch(apiLive).then((data) => {
               data.json().then((res) => {
-                if (process.env.REACT_APP_IS_DEBUG) console.log(res);
+                if (process.env.REACT_APP_IS_DEBUG === "true") console.log(res);
 
                 if (res?.data?.user?.name) {
                   outDJ.displayname = res.data.user.name;
@@ -116,21 +123,48 @@ export default function fetchNowPlaying(
                 }
 
                 setDJ((dj) => {
-                  if (
-                    dj &&
-                    (dj.displayname !== outDJ.displayname ||
-                      dj.avatar !== outDJ.avatar ||
-                      dj.details !== outDJ.details)
-                  ) {
-                    setDJCount((count) => (count === 0 ? 1 : 0));
-                    setOldDJ(dj);
-                  }
-                  return outDJ;
+              if (
+                dj &&
+                (dj.displayname !== outDJ.displayname ||
+                  dj.avatar !== outDJ.avatar ||
+                  dj.details !== outDJ.details)
+              ) {
+                setDJCount((count) => {
+                  console.log(dj, outDJ);
+                  console.log(count);
+                  if (count !== djCount) return count;
+                  
+                  return count === 0 ? 1 : 0;
+                });
+                setOldDJ(dj);
+              }
+              return outDJ;
                 });
               });
             });
           }
 
+          if (apiDJNext) {
+            fetch(apiDJNext).then((data) => {
+              data.json().then((res) => {
+                if (res?.data?.upcoming?.user?.name) {
+                  outDJNext.displayname = res.data.upcoming.user.name;
+                }
+
+                if (res?.data?.upcoming?.image) {
+                  outDJNext.avatar = res.data.upcoming.image;
+                }
+
+                if (res?.data?.upcoming?.description) {
+                  outDJNext.details = res.data.upcoming.description;
+                }
+
+                setDJNext(outDJNext);
+              });
+            });
+
+            
+          }
           setNowPlaying(outNow);
         });
       },

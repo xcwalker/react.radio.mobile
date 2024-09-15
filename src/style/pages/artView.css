@@ -100,7 +100,7 @@ section#artView > .container .fix {
   justify-content: center;
 }
 
-section#artView > .container button {
+section#artView > .container .fix button {
   /* sizing */
   padding: 0;
   margin: 0;
@@ -160,6 +160,7 @@ section#artView > .container .text span.title {
   /* styling */
   color: var(--dnu-light-color-100);
 }
+
 section#artView > .container .text span.subTitle {
   /* text */
   font-size: 14px;
@@ -168,6 +169,36 @@ section#artView > .container .text span.subTitle {
 
   /* styling */
   color: var(--dnu-light-color-100);
+}
+
+section#artView > .container .controls {
+  /* flex */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+section#artView > .container .controls button {
+  /* sizing */
+  width: 2.5rem;
+  aspect-ratio: 1;
+
+  /* flex */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* styling */
+  border: none;
+  background-color: transparent;
+  color: inherit;
+}
+
+section#artView > .container .controls button svg {
+  fill: currentColor;
+  color: inherit;
 }
 
 /** Player Background Animated **/

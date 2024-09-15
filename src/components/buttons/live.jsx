@@ -12,7 +12,6 @@ export default function LiveButton(props) {
       await player.load();
     }
     props.setState("play");
-    player.play();
 
     props.noSleep.enable();
   }

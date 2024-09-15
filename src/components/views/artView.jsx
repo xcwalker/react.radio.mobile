@@ -1,5 +1,7 @@
 import CrossfadeImage from "react-crossfade-image";
 import { useSearchParams } from "react-router-dom";
+import LiveButton from "../nowPlaying/controls/liveButton";
+import StopButton from "../nowPlaying/controls/stopButton";
 
 export default function ArtView(props) {
   const [params, setParams] = useSearchParams();
@@ -35,6 +37,24 @@ export default function ArtView(props) {
             <span className="subTitle">{props.nowPlaying?.artists}</span>
           </div>
         )}
+        <div className="controls">
+          <LiveButton
+            state={props.state}
+            setState={props.setState}
+            noSleep={props.noSleep}
+            showStations={props.showStations}
+            audioUrl={props.audioUrl}
+            setAudioUrlState={props.setAudioUrlState}
+          />
+          <StopButton
+            state={props.state}
+            setState={props.setState}
+            noSleep={props.noSleep}
+            showStations={props.showStations}
+            audioUrl={props.audioUrl}
+            setAudioUrlState={props.setAudioUrlState}
+          />
+        </div>
       </div>
     </section>
   );
