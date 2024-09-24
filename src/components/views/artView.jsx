@@ -31,29 +31,31 @@ export default function ArtView(props) {
             />
           </button>
         </div>
-        {(props.nowPlaying?.title || props.nowPlaying?.artists) && (
-          <div className="text">
-            <span className="title">{props.nowPlaying?.title}</span>
-            <span className="subTitle">{props.nowPlaying?.artists}</span>
+        <div>
+          {(props.nowPlaying?.title || props.nowPlaying?.artists) && (
+            <div className="text">
+              <span className="title">{props.nowPlaying?.title}</span>
+              <span className="subTitle">{props.nowPlaying?.artists}</span>
+            </div>
+          )}
+          <div className="controls">
+            <LiveButton
+              state={props.state}
+              setState={props.setState}
+              noSleep={props.noSleep}
+              showStations={props.showStations}
+              audioUrl={props.audioUrl}
+              setAudioUrlState={props.setAudioUrlState}
+            />
+            <StopButton
+              state={props.state}
+              setState={props.setState}
+              noSleep={props.noSleep}
+              showStations={props.showStations}
+              audioUrl={props.audioUrl}
+              setAudioUrlState={props.setAudioUrlState}
+            />
           </div>
-        )}
-        <div className="controls">
-          <LiveButton
-            state={props.state}
-            setState={props.setState}
-            noSleep={props.noSleep}
-            showStations={props.showStations}
-            audioUrl={props.audioUrl}
-            setAudioUrlState={props.setAudioUrlState}
-          />
-          <StopButton
-            state={props.state}
-            setState={props.setState}
-            noSleep={props.noSleep}
-            showStations={props.showStations}
-            audioUrl={props.audioUrl}
-            setAudioUrlState={props.setAudioUrlState}
-          />
         </div>
       </div>
     </section>

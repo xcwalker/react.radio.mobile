@@ -67,3 +67,14 @@ html {
 .material-symbols-outlined.active {
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 }
+
+@media (orientation: landscape) {
+  #root {
+    /* grid */
+    display: grid;
+    grid-template-columns: 1fr min-content;
+
+    /* styling */
+    overflow: clip;
+  }
+}
