@@ -62,16 +62,23 @@ export default function fetchNowPlaying(
           if (!apiLive) {
             if (res?.djs?.now?.displayname) {
               outDJ.displayname = res.djs.now.displayname;
+            } else {
+              outDJ.displayname = "Otto";
             }
 
             if (res?.djs?.now?.avatar) {
               outDJ.avatar =
                 "https://simulatorradio.com/processor/avatar?size=256&name=" +
                 res.djs.now.avatar;
+            } else {
+              outDJ.avatar =
+                "https://simulatorradio.com/processor/avatar?size=256&name=otto.png";
             }
 
             if (res?.djs?.now?.details) {
               outDJ.details = res.djs.now.details;
+            } else {
+              outDJ.details = "Your number one Simulation Station.";
             }
 
             if (res?.djs?.next?.displayname) {
@@ -94,9 +101,9 @@ export default function fetchNowPlaying(
                   dj.details !== outDJ.details)
               ) {
                 setDJCount((count) => {
-                  console.log(dj, outDJ)
-                  console.log(count)
-                  if (count !== djCount) return count
+                  console.log(dj, outDJ);
+                  console.log(count);
+                  if (count !== djCount) return count;
                   return count === 0 ? 1 : 0;
                 });
                 setOldDJ(dj);
@@ -123,22 +130,22 @@ export default function fetchNowPlaying(
                 }
 
                 setDJ((dj) => {
-              if (
-                dj &&
-                (dj.displayname !== outDJ.displayname ||
-                  dj.avatar !== outDJ.avatar ||
-                  dj.details !== outDJ.details)
-              ) {
-                setDJCount((count) => {
-                  console.log(dj, outDJ);
-                  console.log(count);
-                  if (count !== djCount) return count;
-                  
-                  return count === 0 ? 1 : 0;
-                });
-                setOldDJ(dj);
-              }
-              return outDJ;
+                  if (
+                    dj &&
+                    (dj.displayname !== outDJ.displayname ||
+                      dj.avatar !== outDJ.avatar ||
+                      dj.details !== outDJ.details)
+                  ) {
+                    setDJCount((count) => {
+                      console.log(dj, outDJ);
+                      console.log(count);
+                      if (count !== djCount) return count;
+
+                      return count === 0 ? 1 : 0;
+                    });
+                    setOldDJ(dj);
+                  }
+                  return outDJ;
                 });
               });
             });
@@ -162,8 +169,6 @@ export default function fetchNowPlaying(
                 setDJNext(outDJNext);
               });
             });
-
-            
           }
           setNowPlaying(outNow);
         });
