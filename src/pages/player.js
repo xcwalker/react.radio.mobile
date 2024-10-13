@@ -46,7 +46,7 @@ export function Player(propsIn) {
   const [date, setDate] = useState(new Date());
   const [isReloading, setIsReloading] = useState(false);
   const navigate = useNavigate();
-  
+
   const audioRef = useRef(null);
 
   // no scroll
@@ -67,7 +67,7 @@ export function Player(propsIn) {
     if (params.get("view") !== undefined) {
       document.body.classList.remove(...document.body.classList);
       document.body.classList.add(params.get("view"));
-    } else  {
+    } else {
       document.body.classList.remove(...document.body.classList);
     }
   }, [params]);
@@ -147,39 +147,49 @@ export function Player(propsIn) {
   ]);
 
   useEffect(() => {
-    console.log("timeout!");
     if (
+      audioRef.current.src === window.location.href ||
       !audioRef.current ||
       !audioRef.current.paused ||
       audioRef.current.paused === false ||
       state === "paused"
-    )
+    ) {
+      clearInterval(reload);
       return;
+    }
 
     setIsReloading(true);
 
-    setInterval(async () => {
+    setInterval(reload, 1500);
+
+    async function reload() {
       if (
-        audioRef.current &&
-        audioRef.current.paused === false &&
-        audioRef.current.played.length === 1
+        state === "paused" ||
+        audioRef.current.src === window.location.href ||
+        (audioRef.current &&
+          audioRef.current.paused === false &&
+          audioRef.current.played.length === 1)
       ) {
-        clearInterval();
+        clearInterval(reload);
         setIsReloading(false);
         return;
       }
-      
+
+      console.log(audioRef.current);
+
       setIsReloading(true);
-      console.log("timeout! reload" + isReloading);
+      // console.log("timeout! reload" + isReloading);
 
-      let a = audioRef.current.src;
+      audioRef.current.pause();
       audioRef.current.src = "";
-      audioRef.current.src = a;
+      audioRef.current.src = audioUrlState;
       audioRef.current.play();
-    }, 1000);
+    }
 
-    return () => {};
-  }, [audioRef.current?.paused, state, isReloading]);
+    return () => {
+      clearInterval(reload);
+    };
+  }, [audioRef.current?.paused, state, isReloading, audioUrlState]);
 
   return (
     <>
