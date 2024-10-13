@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
@@ -42,7 +42,10 @@ export function Player(propsIn) {
   const [fetching, setFetching] = useState(false);
   const [fetchCount, setFetchCount] = useState(0);
   const [date, setDate] = useState(new Date());
+  const [isReloading, setIsReloading] = useState(false);
   const navigate = useNavigate();
+  
+  const audioRef = useRef(null);
 
   // no scroll
   useEffect(() => {
@@ -158,6 +161,41 @@ export function Player(propsIn) {
     dj,
   ]);
 
+  useEffect(() => {
+    console.log("timeout!");
+    if (
+      !audioRef.current ||
+      !audioRef.current.paused ||
+      audioRef.current.paused === false ||
+      state === "paused"
+    )
+      return;
+
+    setIsReloading(true);
+
+    setInterval(async () => {
+      if (
+        audioRef.current &&
+        audioRef.current.paused === false &&
+        audioRef.current.played.length === 1
+      ) {
+        clearInterval();
+        setIsReloading(false);
+        return;
+      }
+      
+      setIsReloading(true);
+      console.log("timeout! reload" + isReloading);
+
+      let a = audioRef.current.src;
+      audioRef.current.src = "";
+      audioRef.current.src = a;
+      audioRef.current.play();
+    }, 1000);
+
+    return () => {};
+  }, [audioRef.current?.paused, state, isReloading]);
+
   return (
     <>
       {props.season && props.season === "christmas" && date.getMonth() < 10 && (
@@ -212,6 +250,7 @@ export function Player(propsIn) {
         date={date}
         djNext={djNext}
         station={propsIn.station}
+        isReloading={isReloading}
       />
       <ArtView
         nowPlaying={nowPlaying}
@@ -272,6 +311,7 @@ export function Player(propsIn) {
         id="audioPlayer"
         autoPlay="autoplay"
         crossOrigin="anonymous"
+        ref={audioRef}
       />
     </>
   );
