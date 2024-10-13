@@ -13,6 +13,8 @@ import "./style/defaults/variables.css";
 import "./style/defaults/page-setup.css";
 import "./style/defaults/transitions.css";
 
+import "./style/pages/lowerBar.css";
+
 export default function App() {
   return (
     <>

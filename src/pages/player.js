@@ -21,6 +21,7 @@ import Banners from "../components/banners";
 import LowerBarNavigation from "../components/navigation/lowerBar";
 import HistoryView from "../components/views/historyView";
 import SwitcherView from "../components/views/switcherView";
+import LowerBarNowPlayingV2 from "../components/nowPlaying/lowerBarV2";
 
 var noSleep = new NoSleep();
 
@@ -284,6 +285,16 @@ export function Player(propsIn) {
         station={props.station}
       />
       <SwitcherView station={props.station} setShowStations={setShowStations} />
+
+      <LowerBarNowPlayingV2
+        nowPlaying={nowPlaying}
+        state={state}
+        setState={setState}
+        noSleep={noSleep}
+        showStations={showStations}
+        audioUrl={props.audioUrl}
+        setAudioUrlState={setAudioUrlState}
+      />
 
       <MobileView
         nowPlaying={nowPlaying}
