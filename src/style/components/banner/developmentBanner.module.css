@@ -1,0 +1,23 @@
+.developmentBanner {
+  --_color-1: rgb(0, 0, 0);
+  --_color-2: rgb(255, 0, 0);
+  --_width: 1rem;
+  
+   /* Styling */
+  background: repeating-linear-gradient(
+    135deg,
+    var(--_color-1) 0px,
+    var(--_color-1) var(--_width),
+    var(--_color-2) var(--_width),
+    var(--_color-2) calc(var(--_width) * 2)
+  );
+  background-size: calc((var(--_width) * 2) / sin(135deg)) 100%;
+  animation: stripes 6s infinite linear;
+  color: rgb(255, 255, 255);
+}
+
+@keyframes stripes {
+  to {
+    background-position: calc((var(--_width) * 2) / sin(135deg)) 0;
+  }
+}
