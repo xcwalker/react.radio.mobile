@@ -4,8 +4,14 @@ body section#lowerBarNowPlaying {
 }
 
 body.timetable section#lowerBarNowPlaying,
-body.history section#lowerBarNowPlaying {
+body.history section#lowerBarNowPlaying,
+body.settings section#lowerBarNowPlaying {
   translate: 0 0;
+}
+
+body.timetable section#lowerBarNowPlaying > *,
+body.history section#lowerBarNowPlaying > *,
+body.settings section#lowerBarNowPlaying > * {
   pointer-events: auto;
 }
 
@@ -13,9 +19,6 @@ section#lowerBarNowPlaying .mainTransition {
   opacity: 0;
 }
 
-section#lowerBarNowPlaying,
-section#lowerBarNowPlaying > .container,
-section#lowerBarNowPlaying .mainTransition,
 section#lowerBarNowPlaying,
 section#lowerBarNowPlaying > .container,
 section#lowerBarNowPlaying .mainTransition {
@@ -28,7 +31,10 @@ body.timetable section#lowerBarNowPlaying > .container,
 body.timetable section#lowerBarNowPlaying .mainTransition,
 body.history section#lowerBarNowPlaying,
 body.history section#lowerBarNowPlaying > .container,
-body.history section#lowerBarNowPlaying .mainTransition {
+body.history section#lowerBarNowPlaying .mainTransition,
+body.settings section#lowerBarNowPlaying,
+body.settings section#lowerBarNowPlaying > .container,
+body.settings section#lowerBarNowPlaying .mainTransition {
   opacity: 1;
 }
 
@@ -37,8 +43,7 @@ section#lowerBarNowPlaying {
   height: 100%;
   max-height: 100%;
   overflow: scroll;
-  grid-row: 2/2;
-  grid-column: 1/1;
+  grid-area: main;
   overflow: clip;
   
   /* variables */

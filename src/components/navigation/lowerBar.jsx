@@ -1,22 +1,19 @@
 import { useSearchParams } from "react-router-dom";
 import css from "../../style/components/navigation/lowerBar.module.css";
+import { useAtomValue } from "jotai";
+import { settingsAtom } from "../../App";
 
 export default function LowerBarNavigation(props) {
   const [params, setParams] = useSearchParams();
+
+  const settings = useAtomValue(settingsAtom)
+
   return (
-    <header className={css.lowerBar}>
+    <header className={css.lowerBar + " SettingsIs" + settings?.forceNavigationBarStyle}>
       <nav className={css.container}>
         <ul>
           <button
-            className={
-              css.button +
-              " " +
-              !(
-                params.has("artView") ||
-                params.has("timetable") ||
-                params.has("history")
-              )
-            }
+            className={css.button + " " + !params.has("view")}
             onClick={() => changePage("home", setParams)}
           >
             <svg viewBox="0 -960 960 960">
@@ -24,7 +21,7 @@ export default function LowerBarNavigation(props) {
             </svg>
           </button>
           <button
-            className={css.button + " " + params.has("artView")}
+            className={css.button + " " + params.has("view", "artView")}
             onClick={() => changePage("artview", setParams)}
           >
             <svg viewBox="0 -960 960 960">
@@ -34,7 +31,7 @@ export default function LowerBarNavigation(props) {
           {props.station === "Simulator Radio" && (
             <>
               <button
-                className={css.button + " " + params.has("timetable")}
+                className={css.button + " " + params.has("view", "timetable")}
                 onClick={() => changePage("timetable", setParams)}
               >
                 <svg viewBox="0 -960 960 960">
@@ -42,7 +39,7 @@ export default function LowerBarNavigation(props) {
                 </svg>
               </button>
               <button
-                className={css.button + " " + params.has("history")}
+                className={css.button + " " + params.has("view", "history")}
                 onClick={() => changePage("history", setParams)}
               >
                 <svg viewBox="0 -960 960 960">
@@ -68,13 +65,13 @@ function changePage(page, setParams) {
       setParams({});
       break;
     case "artview":
-      setParams({ artView: true });
+      setParams({ view: "artView" });
       break;
     case "timetable":
-      setParams({ timetable: true });
+      setParams({ view: "timetable" });
       break;
     case "history":
-      setParams({ history: true });
+      setParams({ view: "history" });
       break;
     default:
       console.error("No page matching " + page);

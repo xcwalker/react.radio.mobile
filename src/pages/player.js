@@ -22,6 +22,7 @@ import LowerBarNavigation from "../components/navigation/lowerBar";
 import HistoryView from "../components/views/historyView";
 import SwitcherView from "../components/views/switcherView";
 import LowerBarNowPlayingV2 from "../components/nowPlaying/lowerBarV2";
+import SettingsView from "../components/views/settingsView";
 
 var noSleep = new NoSleep();
 
@@ -63,28 +64,11 @@ export function Player(propsIn) {
 
   // enables different views
   useEffect(() => {
-    if (params.get("switcher") === "true") {
-      document.body.classList.add("switcher");
-    } else if (document.body.classList.contains("switcher")) {
-      document.body.classList.remove("switcher");
-    }
-
-    if (params.get("artView") === "true") {
-      document.body.classList.add("artView");
-    } else if (document.body.classList.contains("artView")) {
-      document.body.classList.remove("artView");
-    }
-
-    if (params.get("timetable") === "true") {
-      document.body.classList.add("timetable");
-    } else if (document.body.classList.contains("timetable")) {
-      document.body.classList.remove("timetable");
-    }
-
-    if (params.get("history") === "true") {
-      document.body.classList.add("history");
-    } else if (document.body.classList.contains("history")) {
-      document.body.classList.remove("history");
+    if (params.get("view") !== undefined) {
+      document.body.classList.remove(...document.body.classList);
+      document.body.classList.add(params.get("view"));
+    } else  {
+      document.body.classList.remove(...document.body.classList);
     }
   }, [params]);
 
@@ -285,6 +269,7 @@ export function Player(propsIn) {
         station={props.station}
       />
       <SwitcherView station={props.station} setShowStations={setShowStations} />
+      <SettingsView />
 
       <LowerBarNowPlayingV2
         nowPlaying={nowPlaying}

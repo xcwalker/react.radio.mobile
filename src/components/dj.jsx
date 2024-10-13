@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 
 export default function DJBar(props) {
   const [params, setParams] = useSearchParams();
-  
+
   return (
     <Button
       notItem={true}
@@ -12,9 +12,10 @@ export default function DJBar(props) {
       dataCount={props.djCount === 0 ? 1 : 0}
       onClick={(e) => {
         e.preventDefault();
-        params.get("controls") !== null
+
+        params.get("view") === "settings"
           ? setParams({})
-          : setParams({ controls: true });
+          : setParams({ view: "settings" });
       }}
     >
       <img

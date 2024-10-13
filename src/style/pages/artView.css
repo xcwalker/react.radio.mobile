@@ -48,15 +48,15 @@ section#mobile > .container > .item {
 
 section#artView {
   /* position */
-  grid-row: 2/2;
-  grid-column: 1/1;
+  /* grid-area: main; */
+  grid-area: main;
 }
+
 
 section#artView > .container {
   /* sizing */
   height: 100%;
-  grid-row: 2/2;
-  grid-column: 1/1;
+  grid-area: main;
   padding: 1.5rem;
 
   /* flex */

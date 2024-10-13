@@ -141,6 +141,9 @@ body.oled .container ul li {
 }
 
 .container ul li .info .inline {
+  /* spacing */
+  padding: 0;
+
   /* flex */
   display: flex;
   flex-direction: row;

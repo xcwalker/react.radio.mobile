@@ -14,6 +14,7 @@ import "./style/defaults/page-setup.css";
 import "./style/defaults/transitions.css";
 
 import "./style/pages/lowerBar.css";
+import { atomWithStorage } from "jotai/utils";
 
 export default function App() {
   return (
@@ -164,3 +165,7 @@ export const stations = [
     url: "/station/truckers-fm",
   },
 ];
+
+export const settingsAtom = atomWithStorage("ReactRadioMobileSettings", {
+  forceNavigationBarStyle: undefined,
+});

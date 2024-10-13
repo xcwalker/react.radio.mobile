@@ -13,9 +13,9 @@ export default function ArtView(props) {
             tabIndex={params.get("artView") === "true" ? 0 : -1}
             onClick={(e) => {
               e.preventDefault();
-              params.get("artView") !== null
+              params.get("view") === "artView"
                 ? setParams({})
-                : setParams({ artView: true });
+                : setParams({ view: "artView" });
             }}
           >
             <CrossfadeImage
