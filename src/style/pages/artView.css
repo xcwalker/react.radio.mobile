@@ -87,6 +87,7 @@ section#artView > .container {
   section#artView > .container .fix button {
     height: 100%;
     width: unset !important;
+    max-width: unset !important;
   }
 }
 
@@ -106,7 +107,8 @@ section#artView > .container .fix button {
   padding: 0;
   margin: 0;
   aspect-ratio: 1/1 !important;
-  width: min(100%, 60vmin);
+  width: min(100%, 80vmin);
+  max-width: 60vh;
 
   /* flex */
   display: flex;
@@ -141,6 +143,13 @@ section#artView > .container .image img {
   object-fit: cover;
   border-radius: 1rem;
   overflow: clip;
+}
+
+section#artView > .container > .content {
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 section#artView > .container .text {

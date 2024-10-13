@@ -31,7 +31,7 @@ export default function ArtView(props) {
             />
           </button>
         </div>
-        <div>
+        <div className="content">
           {(props.nowPlaying?.title || props.nowPlaying?.artists) && (
             <div className="text">
               <span className="title">{props.nowPlaying?.title}</span>

@@ -41,7 +41,7 @@
 
   /* sizing */
   height: 2rem;
-  width: 5rem;
+  width: min(5rem, 20vw);
   padding: 0.125rem;
   margin: 0;
 
