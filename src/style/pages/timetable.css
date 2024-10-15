@@ -45,8 +45,7 @@ section#timetable {
   height: 100%;
   max-height: 100%;
   overflow: scroll;
-  grid-row: 2/2;
-  grid-column: 1/1;
+  grid-area: main;
 
   /* variables */
   --_outer_border-radius: 1rem;

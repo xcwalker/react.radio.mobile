@@ -38,9 +38,9 @@ export default function MobileNowPlaying(props) {
           <button
             onClick={(e) => {
               e.preventDefault();
-              params.get("artView") !== null
+              params.get("view") === "artView"
                 ? setParams({})
-                : setParams({ artView: true });
+                : setParams({ view: "artView" });
             }}
           >
             {props?.nowPlaying?.art && (

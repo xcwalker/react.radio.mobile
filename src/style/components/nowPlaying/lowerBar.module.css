@@ -49,7 +49,7 @@
 
 .lowerBar > .text > .title {
   /* max-width */
-  max-width: 20ch;
+  max-width: min(20ch, 90%);
 
   /* text */
   font-size: 1rem;

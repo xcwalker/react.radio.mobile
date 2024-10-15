@@ -7,7 +7,7 @@ export default function HistoryView(props) {
       {props.station === "Simulator Radio" && (
         <div className="container">
           <History />
-          <LowerBarNowPlaying
+          {/* <LowerBarNowPlaying
             nowPlaying={props.nowPlaying}
             state={props.state}
             setState={props.setState}
@@ -15,7 +15,7 @@ export default function HistoryView(props) {
             showStations={props.showStations}
             audioUrl={props.audioUrl}
             setAudioUrlState={props.setAudioUrlState}
-          />
+          /> */}
         </div>
       )}
       {props.station !== "Simulator Radio" && (

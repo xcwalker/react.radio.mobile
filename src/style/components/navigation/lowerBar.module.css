@@ -41,7 +41,7 @@
 
   /* sizing */
   height: 2rem;
-  width: 5rem;
+  width: min(5rem, 20vw);
   padding: 0.125rem;
   margin: 0;
 
@@ -78,8 +78,8 @@
 
 .lowerBar > .container > ul .button:global(.true)::after,
 .lowerBar > .container > ul .button:hover::after {
-  translate: 0 0;
-  opacity: 1;
+  translate: 0 0 !important;
+  opacity: 1 !important;
 }
 
 .lowerBar > .container > ul .button svg {
@@ -92,9 +92,6 @@
 
 @media (orientation: landscape) {
   .lowerBar {
-    grid-column: 2;
-    grid-row: 2;
-
     background: rgb(0, 0, 0);
     background: -moz-linear-gradient(
       90deg,
@@ -110,6 +107,29 @@
     );
     background: linear-gradient(
       90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+  }
+
+  .lowerBar:global(.SettingsIsDefaultLeft) {
+    background: rgb(0, 0, 0);
+    background: -moz-linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    background: -webkit-linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    background: linear-gradient(
+      270deg,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.2) 50%,
       rgba(0, 0, 0, 0.5) 100%
@@ -150,4 +170,302 @@
     border-top-left-radius: 100vh;
     border-bottom-left-radius: 100vh;
   }
+
+  .lowerBar:global(.SettingsIsDefaultLeft) > .container > ul .button::after {
+    /* position */
+    position: absolute;
+    inset: 0.5rem;
+    left: -0.5rem;
+    right: auto;
+
+    /* sizing */
+    width: 0.25rem;
+    height: auto;
+    border-top-left-radius: 0;
+    border-top-right-radius: 100vh;
+    border-bottom-right-radius: 100vh;
+  }
+}
+
+.lowerBar:global(.SettingsIsRight) {
+    background: rgb(0, 0, 0);
+    background: -moz-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    background: -webkit-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+  }
+
+  .lowerBar:global(.SettingsIsLeft) {
+    background: rgb(0, 0, 0);
+    background: -moz-linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    background: -webkit-linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    background: linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+  }
+
+.lowerBar:global(.SettingsIsRight) > .container,
+.lowerBar:global(.SettingsIsLeft) > .container {
+  /* sizing */
+  height: 100%;
+}
+
+.lowerBar:global(.SettingsIsRight) > .container > ul,
+.lowerBar:global(.SettingsIsLeft) > .container > ul {
+  /* sizing */
+  height: 100%;
+
+  /* flex */
+  flex-direction: column;
+}
+
+.lowerBar:global(.SettingsIsRight) > .container > ul .button,
+.lowerBar:global(.SettingsIsLeft) > .container > ul .button {
+  /* sizing */
+  width: 2rem;
+  height: 15vh;
+}
+
+.lowerBar:global(.SettingsIsRight) > .container > ul .button::after {
+  /* position */
+  position: absolute;
+  inset: 0.5rem;
+  left: auto;
+  right: -0.5rem;
+
+  /* sizing */
+  width: 0.25rem;
+  height: auto;
+  border-top-right-radius: 0;
+  border-top-left-radius: 100vh;
+  border-bottom-left-radius: 100vh;
+}
+
+.lowerBar:global(.SettingsIsBelow) {
+  background: rgb(0, 0, 0);
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 33%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 33%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 33%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+}
+
+.lowerBar:global(.SettingsIsLeft) > .container > ul .button::after {
+  /* position */
+  position: absolute;
+  inset: 0.5rem;
+  left: -0.5rem ;
+  right: auto;
+
+  /* sizing */
+  width: 0.25rem;
+  height: auto;
+  border-top-left-radius: 0;
+  border-top-right-radius: 100vh;
+  border-bottom-right-radius: 100vh;
+}
+
+.lowerBar:global(.SettingsIsBelow) {
+  background: rgb(0, 0, 0);
+  background: -moz-linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 33%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  background: -webkit-linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 33%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 33%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+}
+
+.lowerBar:global(.SettingsIsBelow) > .container {
+  padding: 0.5rem;
+}
+
+.lowerBar:global(.SettingsIsBelow) > .container > ul {
+  /* spacing */
+  margin: 0;
+  padding: 0;
+
+  /* flex */
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.lowerBar:global(.SettingsIsBelow) > .container > ul .button {
+  /* position */
+  position: relative;
+
+  /* sizing */
+  height: 2rem;
+  width: 5rem;
+  padding: 0.125rem;
+  margin: 0;
+
+  /* styling */
+  background: transparent;
+  color: inherit;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.lowerBar:global(.SettingsIsBelow) > .container > ul .button::after {
+  /* content */
+  content: "";
+
+  /* position */
+  position: absolute;
+  inset: 0.5rem;
+  top: auto;
+  bottom: -0.5rem;
+
+  /* sizing */
+  height: 0.25rem;
+  width: auto;
+
+  /* styling */
+  border-top-left-radius: 100vh;
+  border-top-right-radius: 100vh;
+  background-color: currentColor;
+
+  /* transition */
+  opacity: 0;
+  translate: 0 0.25rem;
+  transition: opacity 150ms ease, translate 150ms ease;
+}
+
+
+.lowerBar:global(.SettingsIsAbove) {
+  background: rgb(0, 0, 0);
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 33%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 33%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 33%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#000000",GradientType=1);
+}
+
+.lowerBar:global(.SettingsIsAbove) > .container {
+  padding: 0.5rem;
+}
+
+.lowerBar:global(.SettingsIsAbove) > .container > ul {
+  /* spacing */
+  margin: 0;
+  padding: 0;
+
+  /* flex */
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.lowerBar:global(.SettingsIsAbove) > .container > ul .button {
+  /* position */
+  position: relative;
+
+  /* sizing */
+  height: 2rem;
+  width: 5rem;
+  padding: 0.125rem;
+  margin: 0;
+
+  /* styling */
+  background: transparent;
+  color: inherit;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.lowerBar:global(.SettingsIsAbove) > .container > ul .button::after {
+  /* content */
+  content: "";
+
+  /* position */
+  position: absolute;
+  inset: 0.5rem;
+  top: -0.5rem;
+  bottom: auto;
+
+  /* sizing */
+  height: 0.25rem;
+  width: auto;
+
+  /* styling */
+  border-radius: 0;
+  border-bottom-left-radius: 100vh;
+  border-bottom-right-radius: 100vh;
+  background-color: currentColor;
+
+  /* transition */
+  opacity: 0;
+  translate: 0 0.25rem;
+  transition: opacity 150ms ease, translate 150ms ease;
 }

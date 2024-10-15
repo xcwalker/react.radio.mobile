@@ -1,0 +1,52 @@
+body section#lowerBarNowPlaying {
+  translate: 0 20vh;
+  pointer-events: none;
+}
+
+body.timetable section#lowerBarNowPlaying,
+body.history section#lowerBarNowPlaying,
+body.settings section#lowerBarNowPlaying {
+  translate: 0 0;
+}
+
+body.timetable section#lowerBarNowPlaying > *,
+body.history section#lowerBarNowPlaying > *,
+body.settings section#lowerBarNowPlaying > * {
+  pointer-events: auto;
+}
+
+section#lowerBarNowPlaying .mainTransition {
+  opacity: 0;
+}
+
+section#lowerBarNowPlaying,
+section#lowerBarNowPlaying > .container,
+section#lowerBarNowPlaying .mainTransition {
+  --_duration: 0.35s;
+  transition: opacity var(--_duration) ease, translate var(--_duration) ease;
+}
+
+body.timetable section#lowerBarNowPlaying,
+body.timetable section#lowerBarNowPlaying > .container,
+body.timetable section#lowerBarNowPlaying .mainTransition,
+body.history section#lowerBarNowPlaying,
+body.history section#lowerBarNowPlaying > .container,
+body.history section#lowerBarNowPlaying .mainTransition,
+body.settings section#lowerBarNowPlaying,
+body.settings section#lowerBarNowPlaying > .container,
+body.settings section#lowerBarNowPlaying .mainTransition {
+  opacity: 1;
+}
+
+section#lowerBarNowPlaying {
+  /* sizing */
+  height: 100%;
+  max-height: 100%;
+  overflow: scroll;
+  grid-area: main;
+  overflow: clip;
+  
+  /* variables */
+  --_outer_border-radius: 1rem;
+  --_inner_border-radius: 0.5rem;
+}
