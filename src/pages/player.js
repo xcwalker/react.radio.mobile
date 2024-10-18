@@ -166,6 +166,7 @@ export function Player(propsIn) {
       if (
         state === "paused" ||
         audioRef.current.src === window.location.href ||
+        audioRef.current.src !== audioUrlState ||
         (audioRef.current &&
           audioRef.current.paused === false &&
           audioRef.current.played.length === 1)
