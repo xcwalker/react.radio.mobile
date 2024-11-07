@@ -6,6 +6,7 @@ import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import "../style/pages/mobile.css";
 import "../style/pages/switcher.css";
 import "../style/pages/artView.css";
+import "../style/pages/clockView.css";
 import "../style/pages/timetable.css";
 import "../style/pages/history.css";
 
@@ -23,6 +24,7 @@ import HistoryView from "../components/views/historyView";
 import SwitcherView from "../components/views/switcherView";
 import LowerBarNowPlayingV2 from "../components/nowPlaying/lowerBarV2";
 import SettingsView from "../components/views/settingsView";
+import ClockView from "../components/views/clockView";
 
 var noSleep = new NoSleep();
 
@@ -249,6 +251,16 @@ export function Player(propsIn) {
         isReloading={isReloading}
       />
       <ArtView
+        nowPlaying={nowPlaying}
+        state={state}
+        setState={setState}
+        noSleep={noSleep}
+        showStations={showStations}
+        audioUrl={props.audioUrl}
+        setAudioUrlState={setAudioUrlState}
+        station={props.station}
+      />
+      <ClockView
         nowPlaying={nowPlaying}
         state={state}
         setState={setState}
