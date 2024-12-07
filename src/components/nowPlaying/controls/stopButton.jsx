@@ -27,6 +27,7 @@ export default function StopButton(props) {
     <>
       {props.state === "play" && (
         <Button
+          className="stop"
           onClick={() => stop()}
           title="Stop"
           id="stopBtn"

@@ -8,7 +8,7 @@ export default function DJBar(props) {
   return (
     <Button
       notItem={true}
-      className="dj"
+      className={"dj " + props.className}
       dataCount={props.djCount === 0 ? 1 : 0}
       onClick={(e) => {
         e.preventDefault();

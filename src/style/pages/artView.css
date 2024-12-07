@@ -25,10 +25,14 @@ body.artView section#mobile > .container > .item {
 }
 
 body section#artView {
-  opacity: 0;
   /* translate: -100vw 0; */
   /* translate: 0 100vh; */
   pointer-events: none;
+
+  --_outer_border-radius: 1rem;
+  --_inner_border-radius: 0.5rem;
+  --_inside_border-radius: calc(var(--_outer_border-radius) / 2);
+  --_inside-inner_border-radius: calc(var(--_inner_border-radius) / 2);
 }
 
 body.artView section#artView {
@@ -39,11 +43,23 @@ body.artView section#artView {
 }
 
 section#artView,
+section#artView > .container,
+section#artView > .container .item,
 section#mobile > .container,
-section#mobile > .container > .item {
+section#mobile > .container .item {
   --_duration: 0.35s;
   transition: opacity var(--_duration) ease, scale var(--_duration) ease;
   /* transition: translate 0.25s ease-out; */
+}
+
+section#artView .item {
+  opacity: 0;
+}
+
+body.artView section#artView,
+body.artView section#artView > .container,
+body.artView section#artView .item {
+  opacity: 1;
 }
 
 section#artView {
@@ -52,47 +68,21 @@ section#artView {
   grid-area: main;
 }
 
-
 section#artView > .container {
   /* sizing */
   height: 100%;
   grid-area: main;
-  padding: 1.5rem;
+  padding: 0.5rem;
 
   /* flex */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  flex-direction: row;
+  gap: 0.25rem;
 }
 
-@media (max-height: 650px) and (min-aspect-ratio: 1 / 1) {
-  section#artView > .container {
-    /* grid */
-    display: grid;
-    grid-template-rows: 100%;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  section#artView > .container .fix {
-    /* sizing */
-    height: 100%;
-    width: 100%;
-
-    /* flex */
-    justify-content: flex-end;
-  }
-
-  section#artView > .container .fix button {
-    height: 100%;
-    width: unset !important;
-    max-width: unset !important;
-  }
-}
-
-section#artView > .container .fix {
+section#artView > .container .image {
   /* sizing */
+  aspect-ratio: 1;
   width: 100%;
 
   /* flex */
@@ -100,15 +90,20 @@ section#artView > .container .fix {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  /* styling */
+  overflow: clip;
+  border-radius: var(--_outer_border-radius);
+  border-top-right-radius: var(--_inner_border-radius);
+  border-bottom-right-radius: var(--_inner_border-radius);
 }
 
-section#artView > .container .fix button {
+section#artView > .container .image button {
   /* sizing */
   padding: 0;
   margin: 0;
   aspect-ratio: 1/1 !important;
-  width: min(100%, 80vmin);
-  max-width: 60vh;
+  width: 100%;
 
   /* flex */
   display: flex;
@@ -122,15 +117,6 @@ section#artView > .container .fix button {
   background: transparent;
 }
 
-section#artView > .container .image {
-  /* sizing */
-  width: 100%;
-  height: 100%;
-
-  /* flex */
-  display: flex;
-}
-
 section#artView > .container .image img {
   /* position */
   position: absolute;
@@ -141,32 +127,132 @@ section#artView > .container .image img {
 
   /* styling */
   object-fit: cover;
-  border-radius: 1rem;
-  overflow: clip;
 }
 
-section#artView > .container > .content {
-  /* flex */
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+section#artView > .container .column {
+  /* position */
+  position: relative;
+
+  /* sizing */
+  width: 100%;
+  height: 100%;
+
+  /* grid */
+  display: grid;
+  grid-template-columns: [content-start controlsLive-start controlsPaused-start] 1fr [ controlsLive-end controlsStop-start] 1fr [content-end controlsStop-end controlsPaused-end];
+  grid-template-rows: [content-start] 1fr [content-end controlsLive-start controlsStop-start controlsPaused-start] 1fr [controls-end controlsLive-end controlsStop-end controlsPaused-end];
+  gap: 0.25rem;
 }
 
-section#artView > .container .text {
+section#artView > .container .content {
+  grid-area: content;
+
+  /* sizing */
+  padding: var(--_inside_border-radius);
+
   /* flex */
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column-reverse;
+  align-items: flex-start;
   justify-content: flex-start;
   gap: 0.25rem;
 
   /* styling */
-  text-align: center;
+  overflow: clip;
+  border-radius: var(--_inner_border-radius);
+  border-top-right-radius: var(--_outer_border-radius);
+  backdrop-filter: blur(10px) brightness(0.8);
 }
 
-section#artView > .container .text span.title {
+section#artView > .container .dj {
+  /* position */
+  position: absolute;
+  inset: 0;
+  bottom: auto;
+  z-index: 1;
+
+  /* sizing */
+  --_margin: var(--_inside_border-radius);
+  height: fit-content;
+  padding: 0.5rem;
+  margin: var(--_margin);
+
+  /* flex */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+
   /* text */
-  font-size: 26px;
+  text-align: left;
+
+  /* styling */
+  border-radius: var(--_inside_border-radius);
+  background: transparent;
+  border: none;
+  backdrop-filter: brightness(1.25) blur(10px);
+}
+
+body.oled section#artView > .container .dj {
+  /* styling */
+  background: initial;
+  outline: 3px solid var(--background-color-100);
+  outline-offset: -3px;
+  --_margin: 0px;
+}
+
+section#artView > .container .dj img {
+  /* sizing */
+  --_size: 50px;
+  height: var(--_size);
+  width: var(--_size);
+  flex-shrink: 0;
+
+  /* styling */
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+section#artView > .container .dj .about {
+  /* sizing */
+  height: 100%;
+
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section#artView > .container .dj .about .title {
+  /* text */
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+
+  /* styling */
+  color: var(--foreground-color-100);
+}
+
+section#artView > .container .dj .about .subTitle {
+  /* text */
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+
+  /* styling */
+  color: var(--foreground-color-100);
+}
+
+section#artView > .container .dj .about .subTitle * {
+  padding: 0;
+  margin: 0;
+}
+
+section#artView > .container span.title {
+  /* text */
+  font-size: 2.25rem;
   font-weight: 700;
   line-height: 1;
 
@@ -174,9 +260,9 @@ section#artView > .container .text span.title {
   color: var(--dnu-light-color-100);
 }
 
-section#artView > .container .text span.subTitle {
+section#artView > .container span.subTitle {
   /* text */
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1;
 
@@ -184,34 +270,62 @@ section#artView > .container .text span.subTitle {
   color: var(--dnu-light-color-100);
 }
 
-section#artView > .container .controls {
-  /* flex */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-section#artView > .container .controls button {
+section#artView > .container button {
   /* sizing */
-  width: 2.5rem;
-  aspect-ratio: 1;
 
   /* flex */
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   /* styling */
+  /* background: var(--background-color-200); */
+  background: transparent;
   border: none;
-  background-color: transparent;
+  color: var(--dnu-light-color-200);
+  backdrop-filter: brightness(1.25) blur(10px);
+  border-radius: var(--_inner_border-radius);
+}
+
+section#artView > .container button:hover,
+section#artView > .container button:focus-visible {
+  /* styling */
+  outline: 2px solid;
+  outline-offset: -2px;
+  outline-color: currentColor !important;
+}
+
+section#artView > .container button:focus-visible {
+  /* styling */
+  outline-color: var(--selector-color) !important;
+}
+
+section#artView > .container button svg {
+  /* sizing */
+  --_size: 15svmin;
+  width: var(--_size);
+  height: var(--_size);
+
+  /* styling */
+  fill: currentColor;
   color: inherit;
 }
 
-section#artView > .container .controls button svg {
-  fill: currentColor;
-  color: inherit;
+section#artView > .container button.paused {
+  grid-area: controlsPaused;
+
+  border-bottom-right-radius: var(--_outer_border-radius);
+}
+
+section#artView > .container button.play {
+  grid-area: controlsLive;
+}
+
+section#artView > .container button.stop {
+  grid-area: controlsStop;
+
+  border-bottom-right-radius: var(--_outer_border-radius);
 }
 
 /** Player Background Animated **/

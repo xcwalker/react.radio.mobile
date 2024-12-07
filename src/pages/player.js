@@ -259,6 +259,7 @@ export function Player(propsIn) {
         audioUrl={props.audioUrl}
         setAudioUrlState={setAudioUrlState}
         station={props.station}
+        dj={dj}
       />
       <ClockView
         nowPlaying={nowPlaying}
