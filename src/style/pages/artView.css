@@ -98,6 +98,11 @@ section#artView > .container .image {
   border-bottom-right-radius: var(--_inner_border-radius);
 }
 
+section#artView > .container > .image {
+  width: unset;
+  max-width: 50vw;
+}
+
 section#artView > .container .image button {
   /* sizing */
   padding: 0;
@@ -380,5 +385,21 @@ section#artView > .container button.stop {
 
   75% {
     translate: 0svw -50svh;
+  }
+}
+
+@media (orientation: portrait) {
+  section#artView > .container {
+    flex-direction: column;
+  }
+
+  section#artView > .container > .image {
+    max-height: 40vh;
+    max-width: unset;
+  }
+
+  section#artView > .container .image button {
+    width: unset;
+    height: 100%;
   }
 }

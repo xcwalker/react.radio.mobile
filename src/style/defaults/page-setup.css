@@ -69,61 +69,61 @@ html {
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 
+#root:has(> .SettingsIsTopLeft) {
+  /* grid */
+  grid-template-columns: [main-start nav-start] 1fr [main-end nav-end] !important;
+  grid-template-rows: min-content [nav-start] min-content [nav-end main-start] 1fr [main-end] !important;
+}
+
+#root:has(> .SettingsIsTopRight) {
+  /* grid */
+  grid-template-columns: [main-start nav-start] 1fr [main-end nav-end] !important;
+  grid-template-rows: min-content [nav-start] min-content [nav-end main-start] 1fr [main-end] !important;
+}
+
 @media (orientation: landscape) {
   #root {
     /* grid */
-    display: grid;
     grid-template-columns: [main-start] 1fr [main-end nav-start] min-content [nav-end] !important;
-
-    /* styling */
-    overflow: clip;
   }
 
   #root:has(> .SettingsIsDefaultLeft) {
     /* grid */
-    display: grid;
     grid-template-columns: [nav-start] min-content [nav-end main-start] 1fr [main-end] !important;
+  }
 
-    /* styling */
-    overflow: clip;
+  #root:has(> .SettingsIsTopLeft) {
+    /* grid */
+    grid-template-columns: [nav-start] min-content [nav-end main-start] 1fr [main-end] !important;
+    grid-template-rows: min-content [main-start nav-start] 1fr [main-end nav-end] !important;
+  }
+
+  #root:has(> .SettingsIsTopRight) {
+    /* grid */
+    grid-template-columns: [main-start] 1fr [main-end nav-start] min-content [nav-end] !important;
+    grid-template-rows: min-content [main-start nav-start] 1fr [main-end nav-end] !important;
   }
 }
 
 #root:has(> .SettingsIsRight) {
   /* grid */
-  display: grid;
   grid-template-columns: [main-start] 1fr [main-end nav-start] min-content [nav-end] !important;
-
-  /* styling */
-  overflow: clip;
 }
 
 #root:has(> .SettingsIsLeft) {
   /* grid */
-  display: grid;
   grid-template-columns: [nav-start] min-content [nav-end main-start] 1fr [main-end] !important;
   grid-template-rows: min-content [main-start nav-start] 1fr [main-end nav-end] !important;
-
-  /* styling */
-  overflow: clip;
 }
 
 #root:has(> .SettingsIsAbove) {
   /* grid */
-  display: grid;
   grid-template-columns: [main-start nav-start] 1fr [main-end nav-end] !important;
   grid-template-rows: min-content [nav-start] min-content [nav-end main-start] 1fr [main-end] !important;
-
-  /* styling */
-  overflow: clip;
 }
 
 #root:has(> .SettingsIsBelow) {
   /* grid */
-  display: grid;
   grid-template-columns: [main-start nav-start] 1fr [main-end nav-end] !important;
   grid-template-rows: min-content [main-start] 1fr [main-end nav-start] min-content [nav-end] !important;
-
-  /* styling */
-  overflow: clip;
 }

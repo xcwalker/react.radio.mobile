@@ -11,7 +11,14 @@ export default function History(props) {
   const [limit, setLimit] = useState(10);
 
   useEffect(() => {
-    fetchSRHistory(props.station, limit, setHistory);
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    fetchSRHistory(props.station, limit, setHistory, signal);
+
+    return () => {
+      controller.abort();
+    }
   }, [props.station, count, limit]);
 
   useEffect(() => {

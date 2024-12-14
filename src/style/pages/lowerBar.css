@@ -49,4 +49,5 @@ section#lowerBarNowPlaying {
   /* variables */
   --_outer_border-radius: 1rem;
   --_inner_border-radius: 0.5rem;
+  --_inside-inner_border-radius: 0.25rem;
 }

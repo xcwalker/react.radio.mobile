@@ -74,3 +74,57 @@ section#settings > .container {
   /* flex */
   display: flex;
 }
+
+section#settings > .container .navigationSelection {
+  /* sizing */
+  width: 200px;
+  height: 150px;
+
+  /* grid */
+  display: grid;
+  grid-template-columns: 25px 1fr 25px;
+  grid-template-rows: 25px 1fr 25px;
+  gap: 0.25rem;
+}
+
+section#settings > .container .navigationSelection .indicator {
+  /* sizing */
+  width: 100%;
+  height: 100%;
+
+  /* styling */
+  border-radius: 0.5rem;
+  border: 2px solid var(--foreground-color-500);
+}
+
+section#settings > .container .navigationSelection .indicator.active {
+  border-color: var(--form-color-valid);
+}
+
+section#settings > .container .navigationSelection .center {
+  /* sizing */
+  width: 100%;
+  height: 100%;
+  padding: 0.25rem;
+
+  /* grid */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0.5rem;
+
+  /* styling */
+  border-radius: 0.5rem;
+  border: 2px solid currentColor;
+}
+
+section#settings > .container .navigationSelection .center button {
+  /* styling */
+  border: 2px solid var(--foreground-color-500);
+  background-color: transparent;
+  border-radius: 0.25rem;
+}
+
+section#settings > .container .navigationSelection .center button:hover {
+  border-color: var(--selector-color);
+}
