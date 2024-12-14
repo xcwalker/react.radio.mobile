@@ -257,7 +257,7 @@ section#artView > .container .dj .about .subTitle * {
 
 section#artView > .container span.title {
   /* text */
-  font-size: 2.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
 
@@ -267,7 +267,7 @@ section#artView > .container span.title {
 
 section#artView > .container span.subTitle {
   /* text */
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   line-height: 1;
 
@@ -394,7 +394,7 @@ section#artView > .container button.stop {
   }
 
   section#artView > .container > .image {
-    max-height: 40vh;
+    max-height: 47vh;
     max-width: unset;
   }
 

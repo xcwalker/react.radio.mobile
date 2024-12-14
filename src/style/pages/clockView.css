@@ -87,7 +87,7 @@ section#clockView > .container > .clock {
 
 section#clockView > .container > .clock .time {
   /* text */
-  font-size: min(22vw, 70vh);
+  font-size: min(30vw, 70vh);
   line-height: 0;
 
   /* text */
