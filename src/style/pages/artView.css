@@ -120,6 +120,8 @@ section#artView > .container .image button {
   border: none;
   border-radius: 0;
   background: transparent;
+  outline: none !important;
+  backdrop-filter: none !important;
 }
 
 section#artView > .container .image img {

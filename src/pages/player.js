@@ -149,6 +149,7 @@ export function Player(propsIn) {
   ]);
 
   useEffect(() => {
+    console.log(state)
     if (
       audioRef.current.src === window.location.href ||
       !audioRef.current ||
@@ -156,15 +157,15 @@ export function Player(propsIn) {
       audioRef.current.paused === false ||
       state === "paused"
     ) {
-      clearInterval(reload);
       return;
     }
 
     setIsReloading(true);
 
-    setInterval(reload, 1500);
+    const reloadInterval = setInterval(reload, 1500);
 
     async function reload() {
+      console.log(state)
       if (
         state === "paused" ||
         audioRef.current.src === window.location.href ||
@@ -190,7 +191,8 @@ export function Player(propsIn) {
     }
 
     return () => {
-      clearInterval(reload);
+      clearInterval(reloadInterval);
+      setIsReloading(false)
     };
   }, [audioRef.current?.paused, state, isReloading, audioUrlState]);
 
