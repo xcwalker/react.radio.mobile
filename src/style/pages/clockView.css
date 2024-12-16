@@ -79,7 +79,7 @@ section#clockView > .container > .clock {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: min(2rem, 8vw);
 
   /* styling */
   overflow: clip;
@@ -96,7 +96,7 @@ section#clockView > .container > .clock .time {
 
 section#clockView > .container > .clock .divider {
   /* text */
-  font-size: min(20vw, 50vh);
+  font-size: min(18vw, 50vh);
   line-height: 0;
 
   /* text */

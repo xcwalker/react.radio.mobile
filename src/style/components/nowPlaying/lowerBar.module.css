@@ -49,7 +49,7 @@
 
 .lowerBar > .text > .title {
   /* max-width */
-  max-width: min(20ch, 90%);
+  max-width: min(70vw, 20ch, 90%);
 
   /* text */
   font-size: 1rem;
@@ -64,11 +64,20 @@
 }
 
 .lowerBar > .text > .subTitle {
+  /* max-width */
+  max-width: min(70vw, 20ch, 90%);
+
   /* text */
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1;
   color: var(--foreground-color-300);
+
+  /* overflow */
+  text-wrap: nowrap;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .lowerBar :global(#liveBtn),
