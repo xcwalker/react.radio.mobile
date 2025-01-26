@@ -9,11 +9,11 @@ body.clockView section#mobile {
 
 body.clockView section#mobile > .container {
   scale: 1.3;
-  /* scale: 0.7; */
+  /* scale: 1.3; */
 }
 
 body section#clockView {
-  scale: 0.7;
+  scale: 1.3;
   /* scale: 1.3; */
 }
 
