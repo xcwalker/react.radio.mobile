@@ -13,7 +13,8 @@ export default function fetchNowPlaying(
   setDate,
   setDJNext,
   apiDJNext,
-  djCount
+  djCount,
+  fallbackInfo
 ) {
   if (fetching || fetchCount === count) return;
   setFetching(true);
@@ -25,38 +26,36 @@ export default function fetchNowPlaying(
 
           setDate(new Date());
 
-          let outNow = {};
+          let outNow = {
+            title: fallbackInfo?.title || "",
+            artists: fallbackInfo?.artists || "",
+            art: fallbackInfo?.art || "",
+          };
           let outDJ = {};
           let outDJNext = {};
 
-          if (res?.now_playing?.title) {
+          if (res?.now_playing?.title && res?.now_playing?.title !== "") {
             outNow.title = res?.now_playing?.title;
-          } else if (res?.title) {
+          } else if (res?.title && res?.title !== "") {
             outNow.title = res.title;
-          } else if (res?.data?.title) {
+          } else if (res?.data?.title && res?.data?.title !== "") {
             outNow.title = res.data.title;
-          } else {
-            outNow.title = "";
           }
 
-          if (res?.now_playing?.artists) {
+          if (res?.now_playing?.artists && res?.now_playing?.artists !== "") {
             outNow.artists = res?.now_playing?.artists;
-          } else if (res?.artist) {
+          } else if (res?.artist && res?.artist !== "") {
             outNow.artists = res.artist;
-          } else if (res?.data?.artist) {
+          } else if (res?.data?.artist && res?.data?.artist !== "") {
             outNow.artists = res.data.artist;
-          } else {
-            outNow.artists = "";
           }
 
-          if (res?.now_playing?.art) {
+          if (res?.now_playing?.art && res?.now_playing?.art !== "") {
             outNow.art = res?.now_playing?.art;
-          } else if (res?.art?.large) {
+          } else if (res?.art?.large && res?.art?.large !== "") {
             outNow.art = res.art.large;
-          } else if (res?.data?.album_art) {
+          } else if (res?.data?.album_art && res?.data?.album_art !== "") {
             outNow.art = res.data.album_art;
-          } else {
-            outNow.art = "";
           }
 
           if (!apiLive) {

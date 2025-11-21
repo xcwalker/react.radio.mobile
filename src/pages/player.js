@@ -91,7 +91,8 @@ export function Player(propsIn) {
       setDate,
       setDJNext,
       props.apiDJNext,
-      djCount
+      djCount,
+      props.fallbackInfo
     );
   }, [count, props, fetching, fetchCount, djCount]);
 

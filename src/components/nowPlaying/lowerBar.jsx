@@ -7,7 +7,7 @@ import StopButton from "../buttons/stop";
 export default function LowerBarNowPlaying(props) {
   return (
     <>
-      <div className={css.lowerBar + " mainTransition"}>
+      <div className={css.lowerBar + " mainTransition" + (props.state === "paused" ? " paused" : "")}>
         <CrossfadeImage
           src={props.nowPlaying?.art}
           alt={
@@ -31,7 +31,6 @@ export default function LowerBarNowPlaying(props) {
           showStations={props.showStations}
           audioUrl={props.audioUrl}
           setAudioUrlState={props.setAudioUrlState}
-          placeholder={true}
         />
         <StopButton
           state={props.state}
