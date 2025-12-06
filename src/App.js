@@ -66,6 +66,7 @@ export default function App() {
                   apiUrl="https://apiv2.simulatorradio.com/metadata/combined"
                   apiHistoryUrl="https://apiv2.simulatorradio.com/metadata/history?limit="
                   apiTimetableUrl="https://apiv2.simulatorradio.com/timetable?day="
+                  fallbackInfo={{ title: "Your Favorite Hits!", artists: "Non-stop Music!", art: "/SR.png" }}
                 />
               }
             />
@@ -77,6 +78,7 @@ export default function App() {
                   audioUrl="https://simulatorradio.stream/rock"
                   apiUrl="https://apiv2.simulatorradio.com/rock/nowplaying"
                   apiHistoryUrl="https://apiv2.simulatorradio.com/rock/history?page=1&pagesize="
+                  fallbackInfo={{ title: "Rock On!", artists: "All The Greatest Rock Hits!", art: "/SR Rock.png" }}
                 />
               }
             />
@@ -88,6 +90,7 @@ export default function App() {
                   audioUrl="https://simulatorradio.stream/dance"
                   apiUrl="https://apiv2.simulatorradio.com/dance/nowplaying"
                   apiHistoryUrl="https://apiv2.simulatorradio.com/dance/history?page=1&pagesize="
+                  fallbackInfo={{ title: "Dance the Night Away!", artists: "Feel the Beat!", art: "/SR Dance.png" }}
                 />
               }
             />
@@ -100,6 +103,7 @@ export default function App() {
                   apiUrl="https://apiv2.simulatorradio.com/xmas/nowplaying"
                   apiHistoryUrl="https://apiv2.simulatorradio.com/xmas/history?page=1&pagesize="
                   season="christmas"
+                  fallbackInfo={{ title: "It's Christmas Time!", artists: "Enjoy the festive tunes!", art: "/SR XMAS.png" }}
                   fallback="simulator-radio"
                 />
               }
