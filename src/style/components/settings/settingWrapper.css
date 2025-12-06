@@ -1,0 +1,16 @@
+.settingWrapper {
+  /* flex */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settingWrapper > h2 {
+  /* spacing */
+  margin: 0;
+
+  /* text */
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
