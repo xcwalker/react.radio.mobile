@@ -105,11 +105,14 @@ section#clockView > .container > .clock .divider {
 }
 
 @keyframes blink {
-  0%, 45%, 100% {
+  0%,
+  45%,
+  100% {
     opacity: 1;
   }
 
-  55%, 90% {
+  55%,
+  90% {
     opacity: 0;
   }
 }
@@ -186,6 +189,16 @@ section#clockView > .container .image img {
   object-fit: cover;
   border-radius: 1rem;
   overflow: clip;
+}
+
+@media only screen and (max-width: 600px) {
+  section#clockView > .container > .playing {
+    grid-template-columns: 1fr;
+  }
+
+  section#clockView > .container .fix {
+    display: none;
+  }
 }
 
 section#clockView > .container > .content {
