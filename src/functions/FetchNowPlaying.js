@@ -67,11 +67,11 @@ export default function fetchNowPlaying(
 
             if (res?.djs?.now?.avatar) {
               outDJ.avatar =
-                "https://simulatorradio.com/processor/avatar?size=256&name=" +
+                "https://simulatorradio.com/avatars/" +
                 res.djs.now.avatar;
             } else {
               outDJ.avatar =
-                "https://simulatorradio.com/processor/avatar?size=256&name=otto.png";
+                "https://simulatorradio.com/avatars/otto.png";
             }
 
             if (res?.djs?.now?.details) {

@@ -65,7 +65,7 @@ export default function App() {
                   audioUrl="https://simulatorradio.stream/320"
                   apiUrl="https://apiv2.simulatorradio.com/metadata/combined"
                   apiHistoryUrl="https://apiv2.simulatorradio.com/metadata/history?limit="
-                  apiTimetableUrl="https://apiv2.simulatorradio.com/timetable?day="
+                  apiTimetableUrl="https://apiv3.simulatorradio.com/timetable?day="
                   fallbackInfo={{ title: "Your Favorite Hits!", artists: "Non-stop Music!", art: "/SR.png" }}
                 />
               }

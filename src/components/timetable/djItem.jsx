@@ -21,8 +21,7 @@ export default function TimetableDJItem(props) {
     <li>
       <img
         src={
-          "https://simulatorradio.com/processor/avatar?size=256&name=" +
-          props.slot.dj.avatar
+          "https://simulatorradio.com/avatars/" + props.slot.dj.avatar
         }
         alt=""
       />

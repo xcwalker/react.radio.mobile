@@ -41,5 +41,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "allowScripts": {
+    "protobufjs@7.1.2": true,
+    "protobufjs@6.11.3": true,
+    "core-js@3.27.2": true,
+    "core-js-pure@3.27.2": true
   }
 }
